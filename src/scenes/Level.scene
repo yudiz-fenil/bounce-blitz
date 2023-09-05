@@ -1,0 +1,249 @@
+{
+    "id": "01aefa93-6044-4159-8358-7e91310aa05f",
+    "sceneType": "SCENE",
+    "settings": {
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Level",
+        "borderWidth": 1080,
+        "borderHeight": 1920
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "47074bb9-43fa-476d-aa89-55cc78ff9839",
+            "label": "container_bg",
+            "components": [],
+            "list": [
+                {
+                    "type": "Rectangle",
+                    "id": "ece8d4b0-8cd2-407e-9b94-c626ab8a98b5",
+                    "label": "bg_rectangle",
+                    "components": [],
+                    "x": 540,
+                    "y": 960,
+                    "isFilled": true,
+                    "fillColor": "#000",
+                    "fillAlpha": 0.4,
+                    "strokeColor": "#000",
+                    "strokeAlpha": 5,
+                    "lineWidth": 5,
+                    "width": 1080,
+                    "height": 1920
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "64284a8d-87e5-41d4-b402-6783cbe9940b",
+            "label": "container_game",
+            "scope": "CLASS",
+            "components": [],
+            "list": []
+        },
+        {
+            "type": "Container",
+            "id": "5bb187a7-c370-42c7-b33a-14cb2c90c2a0",
+            "label": "container_bricks",
+            "scope": "CLASS",
+            "components": [],
+            "x": -4320.56957994668,
+            "y": -441.0750337117809,
+            "list": []
+        },
+        {
+            "type": "Container",
+            "id": "0395b273-c0f3-49fa-8a76-8d109dbf4e55",
+            "label": "container_scoreboard",
+            "components": [],
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "cbdade6f-3e86-4600-abaa-0013311e28fb",
+                    "label": "score_board",
+                    "components": [],
+                    "texture": {
+                        "key": "score_board"
+                    },
+                    "x": 150,
+                    "y": -5,
+                    "scaleX": 1.5,
+                    "scaleY": 1.5,
+                    "originY": 0
+                },
+                {
+                    "type": "Text",
+                    "id": "c28d6add-4eb6-4ef0-bd8a-9968c39239bb",
+                    "label": "txt_score",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 149,
+                    "y": 38,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "SCORE 0",
+                    "align": "center",
+                    "fontSize": "35px",
+                    "stroke": "#792a39",
+                    "strokeThickness": 5
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "a85d8f1e-8d3d-4835-afba-796413c9cca2",
+            "label": "container_header",
+            "components": [],
+            "list": [
+                {
+                    "type": "Container",
+                    "id": "1fc0280c-5d58-47d3-83ae-273bda9de067",
+                    "label": "container_settings",
+                    "components": [],
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "a7dbe268-cd7c-40bb-92c2-e50eeef54e78",
+                            "label": "btn_settings",
+                            "components": [],
+                            "texture": {
+                                "key": "btn_settings"
+                            },
+                            "x": 998,
+                            "y": 73
+                        },
+                        {
+                            "type": "Image",
+                            "id": "5b5aff31-5b31-4efb-a621-2a63c792d237",
+                            "label": "btn_settings_icon",
+                            "components": [],
+                            "texture": {
+                                "key": "btn_settings_icon"
+                            },
+                            "x": 998,
+                            "y": 73
+                        }
+                    ]
+                },
+                {
+                    "type": "Text",
+                    "id": "0f5b0a0a-d2dd-4e8c-af0a-fb497ccbaf37",
+                    "label": "txt_level",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 540,
+                    "y": 50,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "LEVEL 1",
+                    "align": "center",
+                    "fontSize": "35px",
+                    "stroke": "#792a39",
+                    "strokeThickness": 5
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "4f5b9a31-6819-4d24-9227-983b410cc264",
+            "label": "container_popup",
+            "scope": "CLASS",
+            "components": [],
+            "x": 538.9673063634997,
+            "y": 974.0390200855007,
+            "list": [
+                {
+                    "type": "Rectangle",
+                    "id": "5e085cf6-b941-4373-8da0-eba9e5f7de83",
+                    "label": "bg_popup",
+                    "components": [],
+                    "x": 1.0326861750680791,
+                    "y": -14.039010276187355,
+                    "isFilled": true,
+                    "fillColor": "#000",
+                    "fillAlpha": 0.5,
+                    "strokeColor": "#000",
+                    "strokeAlpha": 5,
+                    "lineWidth": 5,
+                    "width": 1080,
+                    "height": 1920
+                },
+                {
+                    "type": "Image",
+                    "id": "dc5ab20d-2731-4f9e-846b-94ab258fba7d",
+                    "label": "popup_win",
+                    "components": [],
+                    "texture": {
+                        "key": "popup_win"
+                    },
+                    "x": 1,
+                    "y": -14,
+                    "scaleX": 1.5,
+                    "scaleY": 1.5
+                },
+                {
+                    "type": "Image",
+                    "id": "df10e132-0f57-4524-b888-4edadf7ce712",
+                    "label": "btn_replay",
+                    "components": [],
+                    "texture": {
+                        "key": "btn_replay"
+                    },
+                    "x": -130,
+                    "y": 210
+                },
+                {
+                    "type": "Image",
+                    "id": "3b32c6a1-0582-44b9-a1b4-7efaecf95591",
+                    "label": "btn_popup",
+                    "components": [],
+                    "texture": {
+                        "key": "btn_next"
+                    },
+                    "x": 80,
+                    "y": 210,
+                    "scaleX": 1.5,
+                    "scaleY": 1.5
+                },
+                {
+                    "type": "Text",
+                    "id": "cdd22dfe-41b9-4ddb-baa6-b5313fe4d5a3",
+                    "label": "txt_score_1",
+                    "components": [],
+                    "x": 1,
+                    "y": -27,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "YOUR SCORE",
+                    "align": "center",
+                    "fontSize": "52px",
+                    "stroke": "#944A4C",
+                    "strokeThickness": 5
+                },
+                {
+                    "type": "Text",
+                    "id": "f0f33faa-5766-47d0-82c7-1560cf2c196f",
+                    "label": "popup_score",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 1,
+                    "y": 50,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "150",
+                    "align": "center",
+                    "fontSize": "72px",
+                    "stroke": "#944A4C",
+                    "strokeThickness": 5
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

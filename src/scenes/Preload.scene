@@ -1,0 +1,65 @@
+{
+    "id": "04331fb6-ed91-4d74-b6e9-4bfe0fcfb457",
+    "sceneType": "SCENE",
+    "settings": {
+        "preloadMethodName": "editorPreload",
+        "preloadPackFiles": [
+            "starter-template-basic-typescript/assets/asset-pack.json"
+        ],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Preload",
+        "borderWidth": 1080,
+        "borderHeight": 1920
+    },
+    "displayList": [
+        {
+            "type": "Rectangle",
+            "id": "cb6d6e95-41b2-4266-90a0-feea55171290",
+            "label": "bg_rectangle",
+            "components": [],
+            "x": 540,
+            "y": 960,
+            "isFilled": true,
+            "fillColor": "#000",
+            "fillAlpha": 0.4,
+            "strokeColor": "#000",
+            "strokeAlpha": 5,
+            "lineWidth": 5,
+            "width": 1080,
+            "height": 1920
+        },
+        {
+            "type": "Text",
+            "id": "2ce42443-5227-4c9b-b498-e81f9a21cde3",
+            "label": "progress",
+            "components": [
+                "PreloadText"
+            ],
+            "x": 540,
+            "y": 1209,
+            "originX": 0.5,
+            "originY": 0.5,
+            "text": "0%",
+            "fontSize": "100px"
+        },
+        {
+            "prefabId": "5f0c2f8e-259b-4eb7-8192-d17220e6a05f",
+            "id": "bc2ba70e-cdfe-472b-981c-18c548fff6b9",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "logoPrefab",
+            "components": [],
+            "x": 540,
+            "y": 531
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

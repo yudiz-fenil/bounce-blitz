@@ -1,0 +1,173 @@
+{
+    "section1": {
+        "files": [
+            {
+                "url": "assets/images/ball.png",
+                "type": "image",
+                "key": "ball"
+            },
+            {
+                "url": "assets/images/bricks/brick1.png",
+                "type": "image",
+                "key": "brick1"
+            },
+            {
+                "url": "assets/images/bricks/brick2.png",
+                "type": "image",
+                "key": "brick2"
+            },
+            {
+                "url": "assets/images/bricks/brick3.png",
+                "type": "image",
+                "key": "brick3"
+            },
+            {
+                "url": "assets/images/bricks/brick4.png",
+                "type": "image",
+                "key": "brick4"
+            },
+            {
+                "url": "assets/images/bricks/brick5.png",
+                "type": "image",
+                "key": "brick5"
+            },
+            {
+                "url": "assets/images/bricks/brick6.png",
+                "type": "image",
+                "key": "brick6"
+            },
+            {
+                "url": "assets/images/bricks/brick7.png",
+                "type": "image",
+                "key": "brick7"
+            },
+            {
+                "url": "assets/images/bricks/brick8.png",
+                "type": "image",
+                "key": "brick8"
+            },
+            {
+                "url": "assets/images/bricks/brick9.png",
+                "type": "image",
+                "key": "brick9"
+            },
+            {
+                "url": "assets/images/broken_bricks/broken1.png",
+                "type": "image",
+                "key": "broken1"
+            },
+            {
+                "url": "assets/images/broken_bricks/broken2.png",
+                "type": "image",
+                "key": "broken2"
+            },
+            {
+                "url": "assets/images/broken_bricks/broken3.png",
+                "type": "image",
+                "key": "broken3"
+            },
+            {
+                "url": "assets/images/broken_bricks/broken4.png",
+                "type": "image",
+                "key": "broken4"
+            },
+            {
+                "url": "assets/images/broken_bricks/broken5.png",
+                "type": "image",
+                "key": "broken5"
+            },
+            {
+                "url": "assets/images/broken_bricks/broken6.png",
+                "type": "image",
+                "key": "broken6"
+            },
+            {
+                "url": "assets/images/broken_bricks/broken7.png",
+                "type": "image",
+                "key": "broken7"
+            },
+            {
+                "url": "assets/images/broken_bricks/broken8.png",
+                "type": "image",
+                "key": "broken8"
+            },
+            {
+                "url": "assets/images/broken_bricks/broken9.png",
+                "type": "image",
+                "key": "broken9"
+            },
+            {
+                "url": "assets/images/buttons/btn_info.png",
+                "type": "image",
+                "key": "btn_info"
+            },
+            {
+                "url": "assets/images/buttons/btn_next.png",
+                "type": "image",
+                "key": "btn_next"
+            },
+            {
+                "url": "assets/images/buttons/btn_replay.png",
+                "type": "image",
+                "key": "btn_replay"
+            },
+            {
+                "url": "assets/images/buttons/btn_retry.png",
+                "type": "image",
+                "key": "btn_retry"
+            },
+            {
+                "url": "assets/images/buttons/btn_settings.png",
+                "type": "image",
+                "key": "btn_settings"
+            },
+            {
+                "url": "assets/images/buttons/btn_settings_icon.png",
+                "type": "image",
+                "key": "btn_settings_icon"
+            },
+            {
+                "url": "assets/images/fire.png",
+                "type": "image",
+                "key": "fire"
+            },
+            {
+                "url": "src/scripts/LevelManager.js",
+                "type": "script",
+                "key": "LevelManager"
+            },
+            {
+                "url": "assets/images/paddle.png",
+                "type": "image",
+                "key": "paddle"
+            },
+            {
+                "url": "assets/images/popups/popup_gameover.png",
+                "type": "image",
+                "key": "popup_gameover"
+            },
+            {
+                "url": "assets/images/popups/popup_win.png",
+                "type": "image",
+                "key": "popup_win"
+            },
+            {
+                "url": "assets/images/power_ups/power_3.png",
+                "type": "image",
+                "key": "power_3"
+            },
+            {
+                "url": "assets/images/score_board.png",
+                "type": "image",
+                "key": "score_board"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}
