@@ -2,6 +2,11 @@
     "section1": {
         "files": [
             {
+                "url": "assets/images/ball.png",
+                "type": "image",
+                "key": "ball"
+            },
+            {
                 "url": "assets/images/energyBar.png",
                 "type": "image",
                 "key": "energyBar"

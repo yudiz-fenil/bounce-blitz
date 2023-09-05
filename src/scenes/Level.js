@@ -36,25 +36,30 @@ class Level extends Phaser.Scene {
 		// container_bricks
 		const container_bricks = this.add.container(-4320.56957994668, -441.0750337117809);
 
-		// container_scoreboard
-		const container_scoreboard = this.add.container(0, 0);
-
-		// score_board
-		const score_board = this.add.image(150, -5, "score_board");
-		score_board.scaleX = 1.5;
-		score_board.scaleY = 1.5;
-		score_board.setOrigin(0.5, 0);
-		container_scoreboard.add(score_board);
-
-		// txt_score
-		const txt_score = this.add.text(149, 38, "", {});
-		txt_score.setOrigin(0.5, 0.5);
-		txt_score.text = "SCORE 0";
-		txt_score.setStyle({ "align": "center", "fontSize": "35px", "stroke": "#792a39", "strokeThickness": 5 });
-		container_scoreboard.add(txt_score);
-
 		// container_header
 		const container_header = this.add.container(0, 0);
+
+		// container_header_base
+		const container_header_base = this.add.container(0, 0);
+		container_header.add(container_header_base);
+
+		// header
+		const header = this.add.image(540, 106, "header");
+		container_header.add(header);
+
+		// txt_level
+		const txt_level = this.add.text(540, 140, "", {});
+		txt_level.setOrigin(0.5, 0.5);
+		txt_level.text = "LEVEL 1";
+		txt_level.setStyle({ "align": "center", "fontSize": "35px", "stroke": "#792a39", "strokeThickness": 5 });
+		container_header.add(txt_level);
+
+		// txt_score
+		const txt_score = this.add.text(177, 65, "", {});
+		txt_score.setOrigin(0.5, 0.5);
+		txt_score.text = "0";
+		txt_score.setStyle({ "align": "center", "fontSize": "35px", "stroke": "#792a39", "strokeThickness": 5 });
+		container_header.add(txt_score);
 
 		// container_settings
 		const container_settings = this.add.container(0, 0);
@@ -68,15 +73,31 @@ class Level extends Phaser.Scene {
 		const btn_settings_icon = this.add.image(998, 73, "btn_settings_icon");
 		container_settings.add(btn_settings_icon);
 
-		// txt_level
-		const txt_level = this.add.text(540, 50, "", {});
-		txt_level.setOrigin(0.5, 0.5);
-		txt_level.text = "LEVEL 1";
-		txt_level.setStyle({ "align": "center", "fontSize": "35px", "stroke": "#792a39", "strokeThickness": 5 });
-		container_header.add(txt_level);
+		// container_lifes
+		const container_lifes = this.add.container(0, 0);
+		container_header.add(container_lifes);
+
+		// ball_2
+		const ball_2 = this.add.image(76, 139, "ball");
+		ball_2.scaleX = 0.9;
+		ball_2.scaleY = 0.9;
+		container_lifes.add(ball_2);
+
+		// ball_1
+		const ball_1 = this.add.image(156, 136, "ball");
+		ball_1.scaleX = 0.9;
+		ball_1.scaleY = 0.9;
+		container_lifes.add(ball_1);
+
+		// ball_0
+		const ball_0 = this.add.image(236, 134, "ball");
+		ball_0.scaleX = 0.9;
+		ball_0.scaleY = 0.9;
+		container_lifes.add(ball_0);
 
 		// container_popup
 		const container_popup = this.add.container(538.9673063634997, 974.0390200855007);
+		container_popup.visible = false;
 
 		// bg_popup
 		const bg_popup = this.add.rectangle(1.0326861750680791, -14.039010276187355, 1080, 1920);
@@ -89,7 +110,7 @@ class Level extends Phaser.Scene {
 		container_popup.add(bg_popup);
 
 		// popup_win
-		const popup_win = this.add.image(1, -14, "popup_win");
+		const popup_win = this.add.image(1, -14, "popup_gameover");
 		popup_win.scaleX = 1.5;
 		popup_win.scaleY = 1.5;
 		container_popup.add(popup_win);
@@ -99,7 +120,7 @@ class Level extends Phaser.Scene {
 		container_popup.add(btn_replay);
 
 		// btn_popup
-		const btn_popup = this.add.image(80, 210, "btn_next");
+		const btn_popup = this.add.image(80, 210, "btn_retry");
 		btn_popup.scaleX = 1.5;
 		btn_popup.scaleY = 1.5;
 		container_popup.add(btn_popup);
@@ -120,9 +141,15 @@ class Level extends Phaser.Scene {
 
 		this.container_game = container_game;
 		this.container_bricks = container_bricks;
-		this.txt_score = txt_score;
+		this.container_header_base = container_header_base;
 		this.txt_level = txt_level;
+		this.txt_score = txt_score;
+		this.container_lifes = container_lifes;
 		this.container_popup = container_popup;
+		this.bg_popup = bg_popup;
+		this.popup_win = popup_win;
+		this.btn_replay = btn_replay;
+		this.btn_popup = btn_popup;
 		this.popup_score = popup_score;
 
 		this.events.emit("scene-awake");
@@ -132,25 +159,82 @@ class Level extends Phaser.Scene {
 	container_game;
 	/** @type {Phaser.GameObjects.Container} */
 	container_bricks;
-	/** @type {Phaser.GameObjects.Text} */
-	txt_score;
+	/** @type {Phaser.GameObjects.Container} */
+	container_header_base;
 	/** @type {Phaser.GameObjects.Text} */
 	txt_level;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_score;
+	/** @type {Phaser.GameObjects.Container} */
+	container_lifes;
 	/** @type {Phaser.GameObjects.Container} */
 	container_popup;
+	/** @type {Phaser.GameObjects.Rectangle} */
+	bg_popup;
+	/** @type {Phaser.GameObjects.Image} */
+	popup_win;
+	/** @type {Phaser.GameObjects.Image} */
+	btn_replay;
+	/** @type {Phaser.GameObjects.Image} */
+	btn_popup;
 	/** @type {Phaser.GameObjects.Text} */
 	popup_score;
 
 	/* START-USER-CODE */
 
 	// Write more your code here
-
+	btnAnimation = (texture, callback) => {
+		const scale = texture.scale;
+		this.tweens.add({
+			targets: texture,
+			scaleX: scale - 0.2,
+			scaleY: scale - 0.2,
+			duration: 50,
+			yoyo: true,
+			onComplete: () => {
+				texture.setScale(scale);
+				if (callback) callback();
+			}
+		});
+	}
+	showPopup = () => {
+		if (this.isGameOver) {
+			this.btn_popup.setTexture("btn_retry");
+			this.popup_win.setTexture("popup_gameover");
+		} else {
+			this.btn_popup.setTexture("btn_next");
+			this.popup_win.setTexture("popup_win");
+		}
+		this.popup_score.setText(this.nScore);
+		this.container_popup.setVisible(true);
+	}
+	setInitialBall = () => {
+		this.ballsGroup.clear(true, true);
+		this.powerUpsGroup.clear(true, true);
+		// add a ball
+		this.isGameStart = false;
+		const ball = this.ballsGroup.create(this.oBallInitial.x, this.oBallInitial.y, "ball");
+		ball.setCircle(ball.width / 2);
+		ball.setName("ball");
+		ball.setCollideWorldBounds();
+		this.container_game.add(ball);
+	}
 	setAssets = () => {
 		this.oLevelManager.setLevel(this.nCurrentLevel);
 	}
 	updateScore = (n) => {
 		this.nScore += n;
-		this.txt_score.setText("SCORE " + this.nScore);
+		this.txt_score.setText(this.nScore);
+	}
+	updateLife = () => {
+		if (this.nTotalLife <= 0) {
+			// GAME OVER
+			console.log("GAME OVER");
+			this.physics.pause();
+			this.isGameOver = true;
+			this.showPopup();
+		}
+		this.container_lifes.list[this.nTotalLife].setAlpha(0.5);
 	}
 	create() {
 		this.bricksGroup = this.physics.add.group();
@@ -163,28 +247,55 @@ class Level extends Phaser.Scene {
 		this.editorCreate();
 		this.oLevelManager = new LevelManager(this);
 		this.container_popup.setDepth(2);
-		this.txt_level.setText("LEVEL " + this.nCurrentLevel);
+		this.txt_level.setText("LEVEL - " + this.nCurrentLevel);
 		this.updateScore(0);
 		this.isGameStart = false;
-		this.isGameOver = true;
+		this.isGameOver = false;
 		this.isFire = false;
 		this.oBallVelocity = { x: 0, y: 0 };
 		this.oBallInitial = { x: 540, y: 1645 };
 
-		this.setAssets();
+		this.bg_popup.setInteractive().on("pointerdown", () => { });
+		this.btn_popup.setInteractive().on("pointerdown", () => {
+			let callback;
+			if (this.isGameOver) {
+				callback = () => {
+					this.scene.restart();
+				}
+			} else {
+				callback = () => {
+					this.nCurrentLevel++;
+					this.setAssets();
+					this.container_popup.setVisible(false);
+				}
+			}
+			this.btnAnimation(this.btn_popup, callback);
+		});
+		this.btn_replay.setInteractive().on("pointerdown", () => {
+			const callback = () => {
+				this.setAssets();
+				if (this.isGameOver) this.scene.restart();
+				this.container_popup.setVisible(false);
+			}
+			this.btnAnimation(this.btn_replay, callback);
+		});
 
 		// paddle
 		this.paddle = this.physics.add.image(this.oBallInitial.x, this.oBallInitial.y + 55, "paddle");
 		this.paddle.setName("paddle");
+		this.paddle.setSize(this.paddle.width - 20, this.paddle.height - 60);
 		this.paddle.setImmovable();
 		this.container_game.add(this.paddle);
 
-		// ball
-		const ball = this.ballsGroup.create(this.oBallInitial.x, this.oBallInitial.y, "ball");
-		ball.setCircle(ball.width / 2);
-		ball.setName("ball");
-		ball.setCollideWorldBounds();
-		this.container_game.add(ball);
+		this.setAssets();
+		this.setInitialBall();
+
+		// header
+		const header = this.physics.add.image(540, 106, "header");
+		header.setName("header");
+		header.setSize(1096, 212);
+		header.setImmovable();
+		this.container_header_base.add(header);
 
 		this.fire = this.add.particles("fire");
 
@@ -193,8 +304,8 @@ class Level extends Phaser.Scene {
 		this.endline.setName("endline");
 		this.endline.setImmovable();
 
-		this.input.on('pointerdown', () => {
-			if (!this.isGameStart) {
+		this.input.on('pointerdown', (p, g) => {
+			if (!this.isGameStart && !g.length) {
 				this.isGameStart = true;
 				this.ballsGroup.getChildren().forEach((ball, i) => {
 					ball.setVelocity(150, -1500);
@@ -204,13 +315,12 @@ class Level extends Phaser.Scene {
 		})
 		this.input.on('pointermove', (p) => {
 			let x = p.x;
-			x = Math.min(Math.max(100, x), 980);
+			x = Math.min(Math.max(150, x), 930);
 
-			this.paddle.x = x;
-			// if (!this.isGameOver) {
-
-			// }
-			if (!this.isGameStart) {
+			if (!this.isGameOver) {
+				this.paddle.x = x;
+			}
+			if (!this.isGameStart && !this.isGameOver) {
 				this.ballsGroup.getChildren().forEach(ball => {
 					ball.x = x;
 				})
@@ -221,8 +331,12 @@ class Level extends Phaser.Scene {
 		this.physics.add.collider(this.ballsGroup, this.paddle, (paddle, ball) => {
 			// console.log(ball.name, paddle.name);
 			if (this.isGameStart) {
-				ball.setVelocityX(Phaser.Math.Between(-800, 800));
+				ball.setVelocity(Phaser.Math.Between(-800, 800), -1500);
 			}
+		});
+		// ball, header collider
+		this.physics.add.collider(this.ballsGroup, header, (header, ball) => {
+			// console.log(ball.name, header.name);
 		});
 		// ball, eneline collider
 		this.physics.add.collider(this.ballsGroup, this.endline, (endline, ball) => {
@@ -249,8 +363,14 @@ class Level extends Phaser.Scene {
 		});
 	}
 	setBalls = (ball) => {
+		if (ball.emitter) {
+			ball.emitter.stop(); // Stop the emitter
+			ball.emitter.remove(); // Remove the emitter
+		}
 		ball.destroy();
 		if (this.ballsGroup.getLength() == 0) {
+			this.nTotalLife--;
+			this.updateLife();
 			this.isGameStart = false;
 			const ball = this.ballsGroup.create(this.paddle.x, this.oBallInitial.y, "ball");
 			ball.setCircle(ball.width / 2);
@@ -275,7 +395,6 @@ class Level extends Phaser.Scene {
 				break;
 
 			default:
-				console.log("DEFAULT POWER FALL");
 				break;
 		}
 	}
@@ -294,6 +413,7 @@ class Level extends Phaser.Scene {
 			fireParticles.startFollow(ball);
 			fireParticles.flow(0, 1);
 			this.isFire = true;
+			ball.emitter = fireParticles;
 
 			setTimeout(() => {
 				fireParticles.remove();
@@ -348,9 +468,9 @@ class Level extends Phaser.Scene {
 			this.popBrick(brick);
 			this.updateScore(10);
 			if (this.bricksGroup.getLength() == 0) {
-				this.nCurrentLevel++;
-				this.txt_level.setText("LEVEL " + this.nCurrentLevel);
-				this.setAssets();
+				this.txt_level.setText("LEVEL - " + this.nCurrentLevel);
+				this.setInitialBall();
+				this.showPopup();
 			}
 		}, null, this);
 	}

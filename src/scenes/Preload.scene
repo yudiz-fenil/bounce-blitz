@@ -39,6 +39,7 @@
             "y": 1209,
             "originX": 0.5,
             "originY": 0.5,
+            "visible": false,
             "text": "0%",
             "fontSize": "100px"
         },
@@ -52,7 +53,45 @@
             "label": "logoPrefab",
             "components": [],
             "x": 540,
-            "y": 531
+            "y": 400
+        },
+        {
+            "type": "Sprite",
+            "id": "5286ebae-ea8e-429a-a979-ab00843fdf4b",
+            "label": "outerBar",
+            "scope": "CLASS",
+            "components": [],
+            "texture": {
+                "key": "energyBarContainer"
+            },
+            "x": 540,
+            "y": 1660
+        },
+        {
+            "type": "Sprite",
+            "id": "3aaa3f3d-52ec-4704-91c5-4bf42a7a3d61",
+            "label": "innerBar",
+            "scope": "CLASS",
+            "components": [],
+            "texture": {
+                "key": "energyBar"
+            },
+            "x": 286,
+            "y": 1660,
+            "originX": 0
+        },
+        {
+            "type": "Image",
+            "id": "587507cb-bd63-4021-9d89-c83f805d1d8f",
+            "label": "ball",
+            "scope": "CLASS",
+            "components": [],
+            "texture": {
+                "key": "ball"
+            },
+            "x": 320,
+            "y": 1661,
+            "visible": false
         }
     ],
     "plainObjects": [],

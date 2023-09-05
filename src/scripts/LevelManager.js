@@ -41,7 +41,6 @@ class LevelManager {
 		}
 	}
 	level1 = () => {
-		console.log('%cLEVEL 1', 'color: #5BB381');
 		let nBrick = 0;
 		let nBrickCount = 0;
 		for (let i = 0; i < 6; i++) { // column count
@@ -56,7 +55,6 @@ class LevelManager {
 		}
 	}
 	level2 = () => {
-		console.log('%cLEVEL 2', 'color: #5BB381');
 		let nBrick = 0;
 		let nBrickCount = 0;
 		for (let i = 0; i < 5; i++) { // column count
@@ -77,7 +75,6 @@ class LevelManager {
 		}
 	}
 	level3 = () => {
-		console.log('%cLEVEL 3', 'color: #5BB381');
 		let nBrick = 0;
 		let nBrickCount = 0;
 		for (let i = 0; i < 5; i++) { // column count
@@ -98,7 +95,6 @@ class LevelManager {
 		}
 	}
 	level4 = () => {
-		console.log('%cLEVEL 4', 'color: #5BB381');
 		let nBrick = 0;
 		let nBrickCount = 0;
 		for (let i = 0; i < 6; i++) { // column count
@@ -122,7 +118,6 @@ class LevelManager {
 		}
 	}
 	level5 = () => {
-		console.log('%cLEVEL 5', 'color: #5BB381');
 		let nBrick = 0;
 		let nBrickCount = 0;
 		for (let i = 0; i < 6; i++) { // column count
@@ -143,7 +138,6 @@ class LevelManager {
 		}
 	}
 	level6 = () => {
-		console.log('%cLEVEL 6', 'color: #5BB381');
 		let nBrick = 0;
 		let nBrickCount = 0;
 		for (let i = 0; i < 6; i++) { // column count
@@ -164,7 +158,6 @@ class LevelManager {
 		}
 	}
 	level7 = () => {
-		console.log('%cLEVEL 7', 'color: #5BB381');
 		let nBrick = 0;
 		let nBrickCount = 0;
 		for (let i = 0; i < 8; i++) { // column count
@@ -188,7 +181,6 @@ class LevelManager {
 		}
 	}
 	level8 = () => {
-		console.log('%cLEVEL 8', 'color: #5BB381');
 		let nBrick = 0;
 		let nBrickCount = 0;
 		for (let i = 0; i < 8; i++) { // column count
@@ -212,7 +204,6 @@ class LevelManager {
 		}
 	}
 	level9 = () => {
-		console.log('%cLEVEL 9', 'color: #5BB381');
 		let nBrick = 0;
 		let nBrickCount = 0;
 		for (let i = 0; i < 8; i++) { // column count
@@ -236,7 +227,6 @@ class LevelManager {
 		}
 	}
 	level10 = () => {
-		console.log('%cLEVEL 10', 'color: #5BB381');
 		let nBrick = 0;
 		let nBrickCount = 0;
 		for (let i = 1; i < 9; i++) { // column count

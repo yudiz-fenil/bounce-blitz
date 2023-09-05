@@ -2,11 +2,6 @@
     "section1": {
         "files": [
             {
-                "url": "assets/images/ball.png",
-                "type": "image",
-                "key": "ball"
-            },
-            {
                 "url": "assets/images/bricks/brick1.png",
                 "type": "image",
                 "key": "brick1"
@@ -102,9 +97,24 @@
                 "key": "btn_info"
             },
             {
+                "url": "assets/images/buttons/btn_music_off.png",
+                "type": "image",
+                "key": "btn_music_off"
+            },
+            {
+                "url": "assets/images/buttons/btn_music_on.png",
+                "type": "image",
+                "key": "btn_music_on"
+            },
+            {
                 "url": "assets/images/buttons/btn_next.png",
                 "type": "image",
                 "key": "btn_next"
+            },
+            {
+                "url": "assets/images/buttons/btn_play.png",
+                "type": "image",
+                "key": "btn_play"
             },
             {
                 "url": "assets/images/buttons/btn_replay.png",
@@ -127,14 +137,39 @@
                 "key": "btn_settings_icon"
             },
             {
+                "url": "assets/images/buttons/btn_sound_off.png",
+                "type": "image",
+                "key": "btn_sound_off"
+            },
+            {
+                "url": "assets/images/buttons/btn_sound_on.png",
+                "type": "image",
+                "key": "btn_sound_on"
+            },
+            {
                 "url": "assets/images/fire.png",
                 "type": "image",
                 "key": "fire"
             },
             {
+                "url": "assets/images/header.png",
+                "type": "image",
+                "key": "header"
+            },
+            {
+                "url": "src/scenes/Home.js",
+                "type": "sceneFile",
+                "key": "Home"
+            },
+            {
                 "url": "src/scripts/LevelManager.js",
                 "type": "script",
                 "key": "LevelManager"
+            },
+            {
+                "url": "assets/images/main_bg.png",
+                "type": "image",
+                "key": "main_bg"
             },
             {
                 "url": "assets/images/paddle.png",

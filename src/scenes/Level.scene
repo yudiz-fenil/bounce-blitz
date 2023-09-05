@@ -53,23 +53,44 @@
         },
         {
             "type": "Container",
-            "id": "0395b273-c0f3-49fa-8a76-8d109dbf4e55",
-            "label": "container_scoreboard",
+            "id": "a85d8f1e-8d3d-4835-afba-796413c9cca2",
+            "label": "container_header",
             "components": [],
             "list": [
                 {
+                    "type": "Container",
+                    "id": "72dc4772-79b8-42c2-91a4-246957e389fc",
+                    "label": "container_header_base",
+                    "scope": "CLASS",
+                    "components": [],
+                    "list": []
+                },
+                {
                     "type": "Image",
-                    "id": "cbdade6f-3e86-4600-abaa-0013311e28fb",
-                    "label": "score_board",
+                    "id": "4ab22571-9ff4-4c85-84c0-17b1ae1cbc68",
+                    "label": "header",
                     "components": [],
                     "texture": {
-                        "key": "score_board"
+                        "key": "header"
                     },
-                    "x": 150,
-                    "y": -5,
-                    "scaleX": 1.5,
-                    "scaleY": 1.5,
-                    "originY": 0
+                    "x": 540,
+                    "y": 106
+                },
+                {
+                    "type": "Text",
+                    "id": "0f5b0a0a-d2dd-4e8c-af0a-fb497ccbaf37",
+                    "label": "txt_level",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 540,
+                    "y": 140,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "LEVEL 1",
+                    "align": "center",
+                    "fontSize": "35px",
+                    "stroke": "#792a39",
+                    "strokeThickness": 5
                 },
                 {
                     "type": "Text",
@@ -77,24 +98,16 @@
                     "label": "txt_score",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 149,
-                    "y": 38,
+                    "x": 177,
+                    "y": 65,
                     "originX": 0.5,
                     "originY": 0.5,
-                    "text": "SCORE 0",
+                    "text": "0",
                     "align": "center",
                     "fontSize": "35px",
                     "stroke": "#792a39",
                     "strokeThickness": 5
-                }
-            ]
-        },
-        {
-            "type": "Container",
-            "id": "a85d8f1e-8d3d-4835-afba-796413c9cca2",
-            "label": "container_header",
-            "components": [],
-            "list": [
+                },
                 {
                     "type": "Container",
                     "id": "1fc0280c-5d58-47d3-83ae-273bda9de067",
@@ -126,20 +139,52 @@
                     ]
                 },
                 {
-                    "type": "Text",
-                    "id": "0f5b0a0a-d2dd-4e8c-af0a-fb497ccbaf37",
-                    "label": "txt_level",
+                    "type": "Container",
+                    "id": "05193f33-f973-4f50-a843-e0fe1b98d9c3",
+                    "label": "container_lifes",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 540,
-                    "y": 50,
-                    "originX": 0.5,
-                    "originY": 0.5,
-                    "text": "LEVEL 1",
-                    "align": "center",
-                    "fontSize": "35px",
-                    "stroke": "#792a39",
-                    "strokeThickness": 5
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "2b0497ae-5911-4864-9600-b34151586555",
+                            "label": "ball_2",
+                            "components": [],
+                            "texture": {
+                                "key": "ball"
+                            },
+                            "x": 76,
+                            "y": 139,
+                            "scaleX": 0.9,
+                            "scaleY": 0.9
+                        },
+                        {
+                            "type": "Image",
+                            "id": "75330c3a-6abb-4b40-8aa7-1eb5d3de5763",
+                            "label": "ball_1",
+                            "components": [],
+                            "texture": {
+                                "key": "ball"
+                            },
+                            "x": 156,
+                            "y": 136,
+                            "scaleX": 0.9,
+                            "scaleY": 0.9
+                        },
+                        {
+                            "type": "Image",
+                            "id": "d85c585d-093f-49ea-80ce-b071686b9067",
+                            "label": "ball_0",
+                            "components": [],
+                            "texture": {
+                                "key": "ball"
+                            },
+                            "x": 236,
+                            "y": 134,
+                            "scaleX": 0.9,
+                            "scaleY": 0.9
+                        }
+                    ]
                 }
             ]
         },
@@ -151,11 +196,13 @@
             "components": [],
             "x": 538.9673063634997,
             "y": 974.0390200855007,
+            "visible": false,
             "list": [
                 {
                     "type": "Rectangle",
                     "id": "5e085cf6-b941-4373-8da0-eba9e5f7de83",
                     "label": "bg_popup",
+                    "scope": "CLASS",
                     "components": [],
                     "x": 1.0326861750680791,
                     "y": -14.039010276187355,
@@ -172,9 +219,10 @@
                     "type": "Image",
                     "id": "dc5ab20d-2731-4f9e-846b-94ab258fba7d",
                     "label": "popup_win",
+                    "scope": "CLASS",
                     "components": [],
                     "texture": {
-                        "key": "popup_win"
+                        "key": "popup_gameover"
                     },
                     "x": 1,
                     "y": -14,
@@ -185,6 +233,7 @@
                     "type": "Image",
                     "id": "df10e132-0f57-4524-b888-4edadf7ce712",
                     "label": "btn_replay",
+                    "scope": "CLASS",
                     "components": [],
                     "texture": {
                         "key": "btn_replay"
@@ -196,9 +245,10 @@
                     "type": "Image",
                     "id": "3b32c6a1-0582-44b9-a1b4-7efaecf95591",
                     "label": "btn_popup",
+                    "scope": "CLASS",
                     "components": [],
                     "texture": {
-                        "key": "btn_next"
+                        "key": "btn_retry"
                     },
                     "x": 80,
                     "y": 210,
