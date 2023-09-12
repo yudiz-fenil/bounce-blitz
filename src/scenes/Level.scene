@@ -86,7 +86,7 @@
                     "y": 140,
                     "originX": 0.5,
                     "originY": 0.5,
-                    "text": "LEVEL 1",
+                    "text": "LEVEL - 1",
                     "align": "center",
                     "fontSize": "35px",
                     "stroke": "#792a39",
@@ -154,7 +154,7 @@
                                 "key": "ball"
                             },
                             "x": 76,
-                            "y": 139,
+                            "y": 136,
                             "scaleX": 0.9,
                             "scaleY": 0.9
                         },
@@ -180,7 +180,7 @@
                                 "key": "ball"
                             },
                             "x": 236,
-                            "y": 134,
+                            "y": 136,
                             "scaleX": 0.9,
                             "scaleY": 0.9
                         }

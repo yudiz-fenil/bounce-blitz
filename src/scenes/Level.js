@@ -50,7 +50,7 @@ class Level extends Phaser.Scene {
 		// txt_level
 		const txt_level = this.add.text(540, 140, "", {});
 		txt_level.setOrigin(0.5, 0.5);
-		txt_level.text = "LEVEL 1";
+		txt_level.text = "LEVEL - 1";
 		txt_level.setStyle({ "align": "center", "fontSize": "35px", "stroke": "#792a39", "strokeThickness": 5 });
 		container_header.add(txt_level);
 
@@ -78,7 +78,7 @@ class Level extends Phaser.Scene {
 		container_header.add(container_lifes);
 
 		// ball_2
-		const ball_2 = this.add.image(76, 139, "ball");
+		const ball_2 = this.add.image(76, 136, "ball");
 		ball_2.scaleX = 0.9;
 		ball_2.scaleY = 0.9;
 		container_lifes.add(ball_2);
@@ -90,7 +90,7 @@ class Level extends Phaser.Scene {
 		container_lifes.add(ball_1);
 
 		// ball_0
-		const ball_0 = this.add.image(236, 134, "ball");
+		const ball_0 = this.add.image(236, 136, "ball");
 		ball_0.scaleX = 0.9;
 		ball_0.scaleY = 0.9;
 		container_lifes.add(ball_0);
@@ -221,6 +221,7 @@ class Level extends Phaser.Scene {
 	}
 	setAssets = () => {
 		this.oLevelManager.setLevel(this.nCurrentLevel);
+		this.txt_level.setText("LEVEL - " + this.nCurrentLevel);
 	}
 	updateScore = (n) => {
 		this.nScore += n;
@@ -247,7 +248,6 @@ class Level extends Phaser.Scene {
 		this.editorCreate();
 		this.oLevelManager = new LevelManager(this);
 		this.container_popup.setDepth(2);
-		this.txt_level.setText("LEVEL - " + this.nCurrentLevel);
 		this.updateScore(0);
 		this.isGameStart = false;
 		this.isGameOver = false;
@@ -468,7 +468,6 @@ class Level extends Phaser.Scene {
 			this.popBrick(brick);
 			this.updateScore(10);
 			if (this.bricksGroup.getLength() == 0) {
-				this.txt_level.setText("LEVEL - " + this.nCurrentLevel);
 				this.setInitialBall();
 				this.showPopup();
 			}
