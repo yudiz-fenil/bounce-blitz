@@ -115,15 +115,69 @@
                     "components": [],
                     "list": [
                         {
+                            "type": "Container",
+                            "id": "af60e786-d15a-4b6a-bb64-1511102ed043",
+                            "label": "container_settings_button",
+                            "scope": "CLASS",
+                            "components": [],
+                            "y": -1,
+                            "visible": false,
+                            "list": [
+                                {
+                                    "type": "Image",
+                                    "id": "c071f28b-7914-4fb8-b991-00b8dd20359c",
+                                    "label": "btn_info",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "btn_info"
+                                    },
+                                    "x": 1000,
+                                    "y": 70,
+                                    "scaleX": 0.3,
+                                    "scaleY": 0.3
+                                },
+                                {
+                                    "type": "Image",
+                                    "id": "bb65d13f-b363-4177-ba3c-0d725488355b",
+                                    "label": "btn_sound_on",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "btn_sound_on"
+                                    },
+                                    "x": 1000,
+                                    "y": 70,
+                                    "scaleX": 0.3,
+                                    "scaleY": 0.3
+                                },
+                                {
+                                    "type": "Image",
+                                    "id": "993bbb67-7441-43fa-b106-a67b91b86c7d",
+                                    "label": "btn_music_on",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "btn_music_on"
+                                    },
+                                    "x": 1000,
+                                    "y": 70,
+                                    "scaleX": 0.3,
+                                    "scaleY": 0.3
+                                }
+                            ]
+                        },
+                        {
                             "type": "Image",
                             "id": "a7dbe268-cd7c-40bb-92c2-e50eeef54e78",
                             "label": "btn_settings",
+                            "scope": "CLASS",
                             "components": [],
                             "texture": {
                                 "key": "btn_settings"
                             },
-                            "x": 998,
-                            "y": 73
+                            "x": 1000,
+                            "y": 70
                         },
                         {
                             "type": "Image",
@@ -133,8 +187,8 @@
                             "texture": {
                                 "key": "btn_settings_icon"
                             },
-                            "x": 998,
-                            "y": 73
+                            "x": 1000,
+                            "y": 70
                         }
                     ]
                 },
@@ -189,6 +243,24 @@
             ]
         },
         {
+            "type": "Rectangle",
+            "id": "5e085cf6-b941-4373-8da0-eba9e5f7de83",
+            "label": "bg_popup",
+            "scope": "CLASS",
+            "components": [],
+            "x": 540,
+            "y": 960,
+            "visible": false,
+            "isFilled": true,
+            "fillColor": "#000",
+            "fillAlpha": 0.5,
+            "strokeColor": "#000",
+            "strokeAlpha": 5,
+            "lineWidth": 5,
+            "width": 1080,
+            "height": 1920
+        },
+        {
             "type": "Container",
             "id": "4f5b9a31-6819-4d24-9227-983b410cc264",
             "label": "container_popup",
@@ -199,23 +271,6 @@
             "visible": false,
             "list": [
                 {
-                    "type": "Rectangle",
-                    "id": "5e085cf6-b941-4373-8da0-eba9e5f7de83",
-                    "label": "bg_popup",
-                    "scope": "CLASS",
-                    "components": [],
-                    "x": 1.0326861750680791,
-                    "y": -14.039010276187355,
-                    "isFilled": true,
-                    "fillColor": "#000",
-                    "fillAlpha": 0.5,
-                    "strokeColor": "#000",
-                    "strokeAlpha": 5,
-                    "lineWidth": 5,
-                    "width": 1080,
-                    "height": 1920
-                },
-                {
                     "type": "Image",
                     "id": "dc5ab20d-2731-4f9e-846b-94ab258fba7d",
                     "label": "popup_win",
@@ -224,7 +279,6 @@
                     "texture": {
                         "key": "popup_gameover"
                     },
-                    "x": 1,
                     "y": -14,
                     "scaleX": 1.5,
                     "scaleY": 1.5

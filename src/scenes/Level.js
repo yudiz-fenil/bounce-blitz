@@ -65,12 +65,35 @@ class Level extends Phaser.Scene {
 		const container_settings = this.add.container(0, 0);
 		container_header.add(container_settings);
 
+		// container_settings_button
+		const container_settings_button = this.add.container(0, -1);
+		container_settings_button.visible = false;
+		container_settings.add(container_settings_button);
+
+		// btn_info
+		const btn_info = this.add.image(1000, 70, "btn_info");
+		btn_info.scaleX = 0.3;
+		btn_info.scaleY = 0.3;
+		container_settings_button.add(btn_info);
+
+		// btn_sound_on
+		const btn_sound_on = this.add.image(1000, 70, "btn_sound_on");
+		btn_sound_on.scaleX = 0.3;
+		btn_sound_on.scaleY = 0.3;
+		container_settings_button.add(btn_sound_on);
+
+		// btn_music_on
+		const btn_music_on = this.add.image(1000, 70, "btn_music_on");
+		btn_music_on.scaleX = 0.3;
+		btn_music_on.scaleY = 0.3;
+		container_settings_button.add(btn_music_on);
+
 		// btn_settings
-		const btn_settings = this.add.image(998, 73, "btn_settings");
+		const btn_settings = this.add.image(1000, 70, "btn_settings");
 		container_settings.add(btn_settings);
 
 		// btn_settings_icon
-		const btn_settings_icon = this.add.image(998, 73, "btn_settings_icon");
+		const btn_settings_icon = this.add.image(1000, 70, "btn_settings_icon");
 		container_settings.add(btn_settings_icon);
 
 		// container_lifes
@@ -95,22 +118,22 @@ class Level extends Phaser.Scene {
 		ball_0.scaleY = 0.9;
 		container_lifes.add(ball_0);
 
-		// container_popup
-		const container_popup = this.add.container(538.9673063634997, 974.0390200855007);
-		container_popup.visible = false;
-
 		// bg_popup
-		const bg_popup = this.add.rectangle(1.0326861750680791, -14.039010276187355, 1080, 1920);
+		const bg_popup = this.add.rectangle(540, 960, 1080, 1920);
+		bg_popup.visible = false;
 		bg_popup.isFilled = true;
 		bg_popup.fillColor = 0;
 		bg_popup.fillAlpha = 0.5;
 		bg_popup.strokeColor = 0;
 		bg_popup.strokeAlpha = 5;
 		bg_popup.lineWidth = 5;
-		container_popup.add(bg_popup);
+
+		// container_popup
+		const container_popup = this.add.container(538.9673063634997, 974.0390200855007);
+		container_popup.visible = false;
 
 		// popup_win
-		const popup_win = this.add.image(1, -14, "popup_gameover");
+		const popup_win = this.add.image(0, -14, "popup_gameover");
 		popup_win.scaleX = 1.5;
 		popup_win.scaleY = 1.5;
 		container_popup.add(popup_win);
@@ -144,9 +167,14 @@ class Level extends Phaser.Scene {
 		this.container_header_base = container_header_base;
 		this.txt_level = txt_level;
 		this.txt_score = txt_score;
+		this.container_settings_button = container_settings_button;
+		this.btn_info = btn_info;
+		this.btn_sound_on = btn_sound_on;
+		this.btn_music_on = btn_music_on;
+		this.btn_settings = btn_settings;
 		this.container_lifes = container_lifes;
-		this.container_popup = container_popup;
 		this.bg_popup = bg_popup;
+		this.container_popup = container_popup;
 		this.popup_win = popup_win;
 		this.btn_replay = btn_replay;
 		this.btn_popup = btn_popup;
@@ -166,11 +194,21 @@ class Level extends Phaser.Scene {
 	/** @type {Phaser.GameObjects.Text} */
 	txt_score;
 	/** @type {Phaser.GameObjects.Container} */
-	container_lifes;
+	container_settings_button;
+	/** @type {Phaser.GameObjects.Image} */
+	btn_info;
+	/** @type {Phaser.GameObjects.Image} */
+	btn_sound_on;
+	/** @type {Phaser.GameObjects.Image} */
+	btn_music_on;
+	/** @type {Phaser.GameObjects.Image} */
+	btn_settings;
 	/** @type {Phaser.GameObjects.Container} */
-	container_popup;
+	container_lifes;
 	/** @type {Phaser.GameObjects.Rectangle} */
 	bg_popup;
+	/** @type {Phaser.GameObjects.Container} */
+	container_popup;
 	/** @type {Phaser.GameObjects.Image} */
 	popup_win;
 	/** @type {Phaser.GameObjects.Image} */
@@ -198,8 +236,12 @@ class Level extends Phaser.Scene {
 		});
 	}
 	showPopup = () => {
+		this.container_popup.setScale(0, 0)
+		this.bg_popup.setScale(0.4, 0.4);
 		if (this.isGameOver) {
+			this.btn_replay.setVisible(false);
 			this.btn_popup.setTexture("btn_retry");
+			this.btn_popup.setX(0);
 			this.popup_win.setTexture("popup_gameover");
 		} else {
 			this.btn_popup.setTexture("btn_next");
@@ -207,16 +249,37 @@ class Level extends Phaser.Scene {
 		}
 		this.popup_score.setText(this.nScore);
 		this.container_popup.setVisible(true);
+		this.bg_popup.setVisible(true);
+		this.tweens.add({
+			targets: this.container_popup,
+			scaleX: 1,
+			scaleY: 1,
+			ease: "Bounce.easeOut",
+			duration: 800,
+		})
+		this.tweens.add({
+			targets: this.bg_popup,
+			scaleX: 1,
+			scaleY: 1,
+			duration: 300,
+		})
 	}
 	setInitialBall = () => {
 		this.ballsGroup.clear(true, true);
 		this.powerUpsGroup.clear(true, true);
+		this.starParticlesGroup.forEach(emitters => {
+			emitters.forEach(emitter => {
+				emitter.stop();
+				emitter.remove();
+			})
+		})
 		// add a ball
 		this.isGameStart = false;
 		const ball = this.ballsGroup.create(this.oBallInitial.x, this.oBallInitial.y, "ball");
 		ball.setCircle(ball.width / 2);
 		ball.setName("ball");
 		ball.setCollideWorldBounds();
+		ball.setDepth(1);
 		this.container_game.add(ball);
 	}
 	setAssets = () => {
@@ -237,14 +300,131 @@ class Level extends Phaser.Scene {
 		}
 		this.container_lifes.list[this.nTotalLife].setAlpha(0.5);
 	}
+	showStarParticles = (ball) => {
+		const emitters = [];
+		for (let i = 0; i < 4; i++) {
+			const emitter = this.starParticles[i].createEmitter({
+				speed: 50,
+				scale: { start: 0.8, end: 0 },
+				frequency: 250 * (i),
+				lifespan: 200,
+				quantity: 1,
+				alpha: { start: 0.8, end: 0.2, ease: 'Power2' }
+			});
+			emitter.startFollow(ball);
+			emitters.push(emitter);
+		}
+		ball.emitters = emitters;
+		this.starParticlesGroup.push(emitters);
+	}
+	showDustparticles = (brick) => {
+		// const emitter = this.cube.createEmitter({
+		// 	x: brick.x,
+		// 	y: brick.y,
+		// 	rotate: { start: 0, end: 360 },
+		// 	speed: 500,
+		// 	alpha: { start: 1, end: 0.5 },
+		// 	scale: 0.07,
+		// 	lifespan: 500,
+		// 	frequency: 0,
+		// 	gravityY: 1000,
+		// });
+		// setTimeout(() => {
+		// 	emitter.remove();
+		// }, 500);
+	}
+	settingsHandler = () => {
+		if (this.container_settings_button.visible) {
+			// To Close
+			this.container_settings_button.list.forEach((button, i) => {
+				this.tweens.add({
+					targets: button,
+					x: 1000,
+					y: 70,
+					scaleX: 0.3,
+					scaleY: 0.3,
+					duration: 250,
+					delay: 200 * i,
+					onComplete: () => {
+						if (i == 2) this.container_settings_button.setVisible(false);
+					}
+				})
+			})
+		} else {
+			// To Open
+			this.container_settings_button.setVisible(true);
+			const pos = [{ x: 1000, y: 210 }, { x: 876, y: 196 }, { x: 875, y: 70 }]
+			this.container_settings_button.list.forEach((button, i) => {
+				this.tweens.add({
+					targets: button,
+					x: pos[i].x,
+					y: pos[i].y,
+					scaleX: 1,
+					scaleY: 1,
+					duration: 250,
+					delay: 200 * i,
+				})
+			})
+		}
+	}
+	btnAnimation = (texture, callback) => {
+		this.tweens.add({
+			targets: texture,
+			scaleX: "*=0.8",
+			scaleY: "*=0.8",
+			duration: 80,
+			yoyo: true,
+			onComplete: () => {
+				texture.setScale(1);
+				if (callback) callback();
+			}
+		});
+	}
+	infoHandler = () => {
+		const callback = () => { };
+		this.btnAnimation(this.btn_info, callback);
+	}
+	musicHandler = () => {
+		let callback;
+		if (this.isMusicPlaying) {
+			this.isMusicPlaying = false;
+			callback = () => {
+				this.btn_music_on.setTexture("btn_music_off");
+			}
+		} else {
+			this.isMusicPlaying = true;
+			callback = () => {
+				this.btn_music_on.setTexture("btn_music_on");
+			}
+		}
+		this.btnAnimation(this.btn_music_on, callback);
+	}
+	soundHandler = () => {
+		let callback;
+		if (this.isSoundPlaying) {
+			this.isSoundPlaying = false;
+			callback = () => {
+				this.btn_sound_on.setTexture("btn_sound_off");
+			}
+		} else {
+			this.isSoundPlaying = true;
+			callback = () => {
+				this.btn_sound_on.setTexture("btn_sound_on");
+			}
+		}
+		this.btnAnimation(this.btn_sound_on, callback);
+	}
 	create() {
 		this.bricksGroup = this.physics.add.group();
 		this.powerUpsGroup = this.physics.add.group();
 		this.ballsGroup = this.physics.add.group();
 		this.fireGroup = this.add.group();
+		this.starParticlesGroup = [];
 		this.nCurrentLevel = 1;
 		this.nScore = 0;
 		this.nTotalLife = 3;
+		this.isMusicPlaying = true;
+		this.isSoundPlaying = true;
 		this.editorCreate();
 		this.oLevelManager = new LevelManager(this);
 		this.container_popup.setDepth(2);
@@ -256,6 +436,10 @@ class Level extends Phaser.Scene {
 		this.oBallInitial = { x: 540, y: 1645 };
 
 		this.bg_popup.setInteractive().on("pointerdown", () => { });
+		this.btn_info.setInteractive().on("pointerdown", () => this.infoHandler());
+		this.btn_music_on.setInteractive().on("pointerdown", () => this.musicHandler());
+		this.btn_sound_on.setInteractive().on("pointerdown", () => this.soundHandler());
+		this.btn_settings.setInteractive().on("pointerdown", () => this.settingsHandler());
 		this.btn_popup.setInteractive().on("pointerdown", () => {
 			let callback;
 			if (this.isGameOver) {
@@ -267,6 +451,7 @@ class Level extends Phaser.Scene {
 					this.nCurrentLevel++;
 					this.setAssets();
 					this.container_popup.setVisible(false);
+					this.bg_popup.setVisible(false);
 				}
 			}
 			this.btnAnimation(this.btn_popup, callback);
@@ -276,6 +461,7 @@ class Level extends Phaser.Scene {
 				this.setAssets();
 				if (this.isGameOver) this.scene.restart();
 				this.container_popup.setVisible(false);
+				this.bg_popup.setVisible(false);
 			}
 			this.btnAnimation(this.btn_replay, callback);
 		});
@@ -285,7 +471,20 @@ class Level extends Phaser.Scene {
 		this.paddle.setName("paddle");
 		this.paddle.setSize(this.paddle.width - 20, this.paddle.height - 60);
 		this.paddle.setImmovable();
+		this.paddle.setInteractive();
 		this.container_game.add(this.paddle);
+
+		this.fire = this.add.particles("fire");
+		this.cube = this.add.particles("cube");
+		this.star1 = this.add.particles("star1");
+		this.star1.setAlpha(0.5);
+		this.star2 = this.add.particles("star2");
+		this.star2.setAlpha(0.5);
+		this.star3 = this.add.particles("star3");
+		this.star3.setAlpha(0.5);
+		this.star4 = this.add.particles("star4");
+		this.star4.setAlpha(0.5);
+		this.starParticles = [this.star1, this.star2, this.star3, this.star4];
 
 		this.setAssets();
 		this.setInitialBall();
@@ -296,8 +495,6 @@ class Level extends Phaser.Scene {
 		header.setSize(1096, 212);
 		header.setImmovable();
 		this.container_header_base.add(header);
-
-		this.fire = this.add.particles("fire");
 
 		// endline
 		this.endline = this.physics.add.image(540, 1916).setSize(1080, 10);
@@ -310,6 +507,7 @@ class Level extends Phaser.Scene {
 				this.ballsGroup.getChildren().forEach((ball, i) => {
 					ball.setVelocity(150, -1500);
 					ball.setBounce(1);
+					this.showStarParticles(ball);
 				})
 			}
 		})
@@ -367,6 +565,10 @@ class Level extends Phaser.Scene {
 			ball.emitter.stop(); // Stop the emitter
 			ball.emitter.remove(); // Remove the emitter
 		}
+		ball.emitters.forEach(emitter => {
+			emitter.stop();
+			emitter.remove();
+		})
 		ball.destroy();
 		if (this.ballsGroup.getLength() == 0) {
 			this.nTotalLife--;
@@ -376,6 +578,7 @@ class Level extends Phaser.Scene {
 			ball.setCircle(ball.width / 2);
 			ball.setName("ball");
 			ball.setCollideWorldBounds();
+			ball.setDepth(1);
 			this.container_game.add(ball);
 		}
 	}
@@ -406,7 +609,6 @@ class Level extends Phaser.Scene {
 				speed: { min: -500, max: 500 },
 				angle: { min: 0, max: 360 },
 				scale: { start: 0.4, end: 0 },
-				blendMode: "ADD",
 				lifespan: 100,
 				frequency: 30,
 			});
@@ -427,6 +629,7 @@ class Level extends Phaser.Scene {
 		ball2.setCircle(ball2.width / 2);
 		ball2.setName("ball2");
 		ball2.setBounce(1);
+		ball2.setDepth(1);
 		ball2.setCollideWorldBounds();
 		this.container_game.add(ball2);
 		ball2.setVelocity(this.oBallVelocity.x - 150, this.oBallVelocity.y);
@@ -436,8 +639,12 @@ class Level extends Phaser.Scene {
 		ball3.setName("ball3");
 		ball3.setCollideWorldBounds();
 		ball3.setBounce(1);
+		ball3.setDepth(1);
 		this.container_game.add(ball3);
 		ball3.setVelocity(this.oBallVelocity.x + 150, this.oBallVelocity.y);
+
+		this.showStarParticles(ball2);
+		this.showStarParticles(ball3);
 	}
 	setBrokenBrick = (brick) => {
 		const name = brick.name;
@@ -450,6 +657,7 @@ class Level extends Phaser.Scene {
 		brick.destroy();
 	}
 	popBrick = (brick) => {
+		this.showDustparticles(brick);
 		if (brick.name.includes("hard")) {
 			this.setBrokenBrick(brick);
 		} else if (brick.name.includes("broken")) {

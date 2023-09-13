@@ -31,7 +31,9 @@
                 "key": "btn_play"
             },
             "x": 540,
-            "y": 1213
+            "y": 1213,
+            "scaleX": 1.2,
+            "scaleY": 1.2
         },
         {
             "type": "Image",
@@ -43,7 +45,9 @@
                 "key": "btn_info"
             },
             "x": 740,
-            "y": 1490
+            "y": 1490,
+            "scaleX": 1.2,
+            "scaleY": 1.2
         },
         {
             "type": "Image",
@@ -55,7 +59,9 @@
                 "key": "btn_music_on"
             },
             "x": 540,
-            "y": 1490
+            "y": 1490,
+            "scaleX": 1.2,
+            "scaleY": 1.2
         },
         {
             "type": "Image",
@@ -67,7 +73,9 @@
                 "key": "btn_sound_on"
             },
             "x": 340,
-            "y": 1490
+            "y": 1490,
+            "scaleX": 1.2,
+            "scaleY": 1.2
         }
     ],
     "plainObjects": [],

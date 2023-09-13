@@ -149,7 +149,7 @@ class Preload extends Phaser.Scene {
 		if (this.ball.x >= 300) this.ball.setVisible(true);
 		if (this.isGameLoaded1 && this.isGameLoaded2) {
 			this.scene.stop("Preload");
-			this.scene.start("Level");
+			this.scene.start("Home");
 		}
 	}
 

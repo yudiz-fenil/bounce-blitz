@@ -22,15 +22,23 @@ class Home extends Phaser.Scene {
 
 		// btn_play
 		const btn_play = this.add.image(540, 1213, "btn_play");
+		btn_play.scaleX = 1.2;
+		btn_play.scaleY = 1.2;
 
 		// btn_info
 		const btn_info = this.add.image(740, 1490, "btn_info");
+		btn_info.scaleX = 1.2;
+		btn_info.scaleY = 1.2;
 
 		// btn_music_on
 		const btn_music_on = this.add.image(540, 1490, "btn_music_on");
+		btn_music_on.scaleX = 1.2;
+		btn_music_on.scaleY = 1.2;
 
 		// btn_sound_on
 		const btn_sound_on = this.add.image(340, 1490, "btn_sound_on");
+		btn_sound_on.scaleX = 1.2;
+		btn_sound_on.scaleY = 1.2;
 
 		this.btn_play = btn_play;
 		this.btn_info = btn_info;
@@ -60,7 +68,7 @@ class Home extends Phaser.Scene {
 			duration: 80,
 			yoyo: true,
 			onComplete: () => {
-				texture.setScale(1);
+				texture.setScale(1.2);
 				if (callback) callback();
 			}
 		});

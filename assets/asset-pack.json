@@ -147,6 +147,11 @@
                 "key": "btn_sound_on"
             },
             {
+                "url": "assets/images/cube.png",
+                "type": "image",
+                "key": "cube"
+            },
+            {
                 "url": "assets/images/fire.png",
                 "type": "image",
                 "key": "fire"
@@ -195,6 +200,31 @@
                 "url": "assets/images/score_board.png",
                 "type": "image",
                 "key": "score_board"
+            },
+            {
+                "url": "assets/images/stars/shine.png",
+                "type": "image",
+                "key": "shine"
+            },
+            {
+                "url": "assets/images/stars/star1.png",
+                "type": "image",
+                "key": "star1"
+            },
+            {
+                "url": "assets/images/stars/star2.png",
+                "type": "image",
+                "key": "star2"
+            },
+            {
+                "url": "assets/images/stars/star3.png",
+                "type": "image",
+                "key": "star3"
+            },
+            {
+                "url": "assets/images/stars/star4.png",
+                "type": "image",
+                "key": "star4"
             }
         ]
     },
