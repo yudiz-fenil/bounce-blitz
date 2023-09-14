@@ -388,19 +388,6 @@ class Level extends Phaser.Scene {
 			ease: 'Power2',
 		})
 	}
-	btnAnimation = (texture, callback) => {
-		this.tweens.add({
-			targets: texture,
-			scaleX: "*=0.8",
-			scaleY: "*=0.8",
-			duration: 80,
-			yoyo: true,
-			onComplete: () => {
-				texture.setScale(1);
-				if (callback) callback();
-			}
-		});
-	}
 	infoHandler = () => {
 		const callback = () => { };
 		this.btnAnimation(this.btn_info, callback);
