@@ -53,6 +53,12 @@ class Preload extends Phaser.Scene {
 		const ball = this.add.image(320, 1661, "ball");
 		ball.visible = false;
 
+		// text
+		const text = this.add.text(540, 1566, "", {});
+		text.setOrigin(0.5, 0.5);
+		text.text = "LOADING...";
+		text.setStyle({ "align": "center", "fontSize": "35px", "stroke": "#792a39", "strokeThickness":5});
+
 		// progress (components)
 		new PreloadText(progress);
 
@@ -86,16 +92,6 @@ class Preload extends Phaser.Scene {
 			this.isGameLoaded1 = true;
 		});
 
-		// this.outerBar = this.add.sprite(540, 1660, "energyBarContainer");
-		// this.outerBar.setOrigin(0.5);
-
-		// this.innerBar = this.add.sprite(
-		// 	this.outerBar.x - this.outerBar.displayWidth / 2 + 20,
-		// 	this.outerBar.y,
-		// 	"energyBar"
-		// );
-		// this.innerBar.setOrigin(0, 0.5);
-
 		this.innerBarWidth = this.innerBar.displayWidth;
 
 		this.maskGraphics = this.make.graphics();
@@ -109,7 +105,7 @@ class Preload extends Phaser.Scene {
 
 		this.innerBar.setMask(this.maskGraphics.createGeometryMask());
 
-		const loadingDuration = 500;
+		const loadingDuration = 3000;
 		const intervalDuration = 30;
 		const numIntervals = loadingDuration / intervalDuration;
 		let currentInterval = 0;

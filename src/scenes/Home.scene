@@ -10,6 +10,22 @@
     },
     "displayList": [
         {
+            "type": "Rectangle",
+            "id": "915672ad-e005-4a2e-a2e4-d47c34bd08c0",
+            "label": "bg_rectangle",
+            "components": [],
+            "x": 540,
+            "y": 960,
+            "isFilled": true,
+            "fillColor": "#000",
+            "fillAlpha": 0.4,
+            "strokeColor": "#000",
+            "strokeAlpha": 5,
+            "lineWidth": 5,
+            "width": 1080,
+            "height": 1920
+        },
+        {
             "prefabId": "5f0c2f8e-259b-4eb7-8192-d17220e6a05f",
             "id": "d355c42a-2001-44dc-b52d-bc34f922b859",
             "unlock": [

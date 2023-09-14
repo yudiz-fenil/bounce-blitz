@@ -157,6 +157,11 @@
                 "key": "fire"
             },
             {
+                "url": "assets/images/flames.png",
+                "type": "image",
+                "key": "flames"
+            },
+            {
                 "url": "assets/images/header.png",
                 "type": "image",
                 "key": "header"
@@ -170,11 +175,6 @@
                 "url": "src/scripts/LevelManager.js",
                 "type": "script",
                 "key": "LevelManager"
-            },
-            {
-                "url": "assets/images/main_bg.png",
-                "type": "image",
-                "key": "main_bg"
             },
             {
                 "url": "assets/images/paddle.png",

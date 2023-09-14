@@ -92,6 +92,21 @@
             "x": 320,
             "y": 1661,
             "visible": false
+        },
+        {
+            "type": "Text",
+            "id": "9c91be9b-4812-454c-9044-755d35dddfa0",
+            "label": "text",
+            "components": [],
+            "x": 540,
+            "y": 1566,
+            "originX": 0.5,
+            "originY": 0.5,
+            "text": "LOADING...",
+            "align": "center",
+            "fontSize": "35px",
+            "stroke": "#792a39",
+            "strokeThickness": 5
         }
     ],
     "plainObjects": [],

@@ -16,6 +16,15 @@ class Home extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
+		// bg_rectangle
+		const bg_rectangle = this.add.rectangle(540, 960, 1080, 1920);
+		bg_rectangle.isFilled = true;
+		bg_rectangle.fillColor = 0;
+		bg_rectangle.fillAlpha = 0.4;
+		bg_rectangle.strokeColor = 0;
+		bg_rectangle.strokeAlpha = 5;
+		bg_rectangle.lineWidth = 5;
+
 		// logoPrefab
 		const logoPrefab = new LogoPrefab(this, 540, 400);
 		this.add.existing(logoPrefab);

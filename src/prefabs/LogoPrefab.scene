@@ -10,13 +10,22 @@
     },
     "displayList": [
         {
-            "type": "Image",
-            "id": "7308e4b7-22c7-471e-a44b-6a836b591e5c",
-            "label": "logo",
+            "type": "Container",
+            "id": "cdf46dd0-3e11-4978-9b61-c604a6e2d07d",
+            "label": "container_1",
             "components": [],
-            "texture": {
-                "key": "logo"
-            }
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "7308e4b7-22c7-471e-a44b-6a836b591e5c",
+                    "label": "logo",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "logo"
+                    }
+                }
+            ]
         }
     ],
     "plainObjects": [],

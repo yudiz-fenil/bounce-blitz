@@ -34,7 +34,7 @@ class Level extends Phaser.Scene {
 		const container_game = this.add.container(0, 0);
 
 		// container_bricks
-		const container_bricks = this.add.container(-4320.56957994668, -441.0750337117809);
+		const container_bricks = this.add.container(0, 0);
 
 		// container_header
 		const container_header = this.add.container(0, 0);
@@ -172,6 +172,7 @@ class Level extends Phaser.Scene {
 		this.btn_sound_on = btn_sound_on;
 		this.btn_music_on = btn_music_on;
 		this.btn_settings = btn_settings;
+		this.btn_settings_icon = btn_settings_icon;
 		this.container_lifes = container_lifes;
 		this.bg_popup = bg_popup;
 		this.container_popup = container_popup;
@@ -203,6 +204,8 @@ class Level extends Phaser.Scene {
 	btn_music_on;
 	/** @type {Phaser.GameObjects.Image} */
 	btn_settings;
+	/** @type {Phaser.GameObjects.Image} */
+	btn_settings_icon;
 	/** @type {Phaser.GameObjects.Container} */
 	container_lifes;
 	/** @type {Phaser.GameObjects.Rectangle} */
@@ -247,8 +250,8 @@ class Level extends Phaser.Scene {
 			this.btn_popup.setTexture("btn_next");
 			this.popup_win.setTexture("popup_win");
 		}
-		this.popup_score.setText(this.nScore);
 		this.container_popup.setVisible(true);
+		this.popup_score.setText(this.targetScore);
 		this.bg_popup.setVisible(true);
 		this.tweens.add({
 			targets: this.container_popup,
@@ -275,7 +278,7 @@ class Level extends Phaser.Scene {
 		})
 		// add a ball
 		this.isGameStart = false;
-		const ball = this.ballsGroup.create(this.oBallInitial.x, this.oBallInitial.y, "ball");
+		const ball = this.ballsGroup.create(this.paddle.x, this.oBallInitial.y, "ball");
 		ball.setCircle(ball.width / 2);
 		ball.setName("ball");
 		ball.setCollideWorldBounds();
@@ -287,9 +290,20 @@ class Level extends Phaser.Scene {
 		this.txt_level.setText("LEVEL - " + this.nCurrentLevel);
 	}
 	updateScore = (n) => {
-		this.nScore += n;
-		this.txt_score.setText(this.nScore);
-	}
+		this.targetScore += n;
+		if (this.nScore === this.targetScore) return;
+		this.tweens.killTweensOf(this);
+		this.tweens.add({
+			targets: this,
+			nScore: this.targetScore,
+			duration: 1000,
+			ease: 'Linear',
+			onUpdate: () => {
+				this.nScore = Math.round(this.nScore);
+				this.txt_score.setText(this.nScore);
+			}
+		});
+	};
 	updateLife = () => {
 		if (this.nTotalLife <= 0) {
 			// GAME OVER
@@ -307,8 +321,9 @@ class Level extends Phaser.Scene {
 				speed: 50,
 				scale: { start: 0.8, end: 0 },
 				frequency: 250 * (i),
-				lifespan: 200,
+				lifespan: 150,
 				quantity: 1,
+				blendMode: "ADD",
 				alpha: { start: 0.8, end: 0.2, ease: 'Power2' }
 			});
 			emitter.startFollow(ball);
@@ -321,13 +336,12 @@ class Level extends Phaser.Scene {
 		// const emitter = this.cube.createEmitter({
 		// 	x: brick.x,
 		// 	y: brick.y,
-		// 	rotate: { start: 0, end: 360 },
-		// 	speed: 500,
-		// 	alpha: { start: 1, end: 0.5 },
-		// 	scale: 0.07,
+		// 	speed: { min: -500, max: 500 },
+		// 	angle: { min: 0, max: 360 },
+		// 	scale: { start: 0.1, end: 0 },
+		// 	blendMode: 'NORMAL',
 		// 	lifespan: 500,
-		// 	frequency: 0,
-		// 	gravityY: 1000,
+		// 	gravityY: 3000,
 		// });
 		// setTimeout(() => {
 		// 	emitter.remove();
@@ -366,6 +380,13 @@ class Level extends Phaser.Scene {
 				})
 			})
 		}
+		this.tweens.add({
+			targets: this.btn_settings_icon,
+			scaleX: -1,
+			duration: 200,
+			yoyo: true,
+			ease: 'Power2',
+		})
 	}
 	btnAnimation = (texture, callback) => {
 		this.tweens.add({
@@ -421,6 +442,7 @@ class Level extends Phaser.Scene {
 		this.fireGroup = this.add.group();
 		this.starParticlesGroup = [];
 		this.nCurrentLevel = 1;
+		this.targetScore = 0;
 		this.nScore = 0;
 		this.nTotalLife = 3;
 		this.isMusicPlaying = true;
@@ -505,7 +527,7 @@ class Level extends Phaser.Scene {
 			if (!this.isGameStart && !g.length) {
 				this.isGameStart = true;
 				this.ballsGroup.getChildren().forEach((ball, i) => {
-					ball.setVelocity(150, -1500);
+					ball.setVelocity(150, -1350);
 					ball.setBounce(1);
 					this.showStarParticles(ball);
 				})
@@ -529,7 +551,7 @@ class Level extends Phaser.Scene {
 		this.physics.add.collider(this.ballsGroup, this.paddle, (paddle, ball) => {
 			// console.log(ball.name, paddle.name);
 			if (this.isGameStart) {
-				ball.setVelocity(Phaser.Math.Between(-800, 800), -1500);
+				ball.setVelocity(Phaser.Math.Between(-800, 800), -1350);
 			}
 		});
 		// ball, header collider
@@ -554,7 +576,6 @@ class Level extends Phaser.Scene {
 				case "balls":
 					this.addTwoBalls();
 					break;
-
 				default:
 					break;
 			}
@@ -574,21 +595,22 @@ class Level extends Phaser.Scene {
 			this.nTotalLife--;
 			this.updateLife();
 			this.isGameStart = false;
-			const ball = this.ballsGroup.create(this.paddle.x, this.oBallInitial.y, "ball");
-			ball.setCircle(ball.width / 2);
-			ball.setName("ball");
-			ball.setCollideWorldBounds();
-			ball.setDepth(1);
-			this.container_game.add(ball);
+			this.setInitialBall();
+			// const ball = this.ballsGroup.create(this.paddle.x, this.oBallInitial.y, "ball");
+			// ball.setCircle(ball.width / 2);
+			// ball.setName("ball");
+			// ball.setCollideWorldBounds();
+			// ball.setDepth(1);
+			// this.container_game.add(ball);
 		}
 	}
 	fallPowerUps = (brick) => {
 		const powerName = brick.name.split("_")[1];
 		switch (powerName) {
 			case "fire":
-				const fire = this.powerUpsGroup.create(brick.x, brick.y, "fire");
+				const fire = this.powerUpsGroup.create(brick.x, brick.y, "flames");
 				fire.name = "fire";
-				fire.setScale(0.4, 0.4);
+				fire.setScale(0.3, 0.3);
 				fire.body.setGravityY(800);
 				break;
 			case "balls":

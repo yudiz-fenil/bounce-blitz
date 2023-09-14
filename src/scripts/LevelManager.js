@@ -49,7 +49,10 @@ class LevelManager {
 				nBrickCount++;
 				if (nBrick > 9) nBrick = 1;
 				const brick = this.oScene.bricksGroup.create((180 * i) - (j * 90), 300 + (j * 150), "brick" + (nBrick));
-				brick.setName(nBrickCount == 9 ? "hard_balls_brick_" + nBrickCount : "normalbrick_" + nBrickCount);
+				brick.setName("normalbrick_" + nBrickCount);
+				if (nBrickCount == 9) {
+					brick.setName("hard_balls_brick_" + nBrickCount);
+				}
 				brick.setScale(1.5, 1.5);
 			}
 		}

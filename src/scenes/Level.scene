@@ -47,8 +47,6 @@
             "label": "container_bricks",
             "scope": "CLASS",
             "components": [],
-            "x": -4320.56957994668,
-            "y": -441.0750337117809,
             "list": []
         },
         {
@@ -183,6 +181,7 @@
                             "type": "Image",
                             "id": "5b5aff31-5b31-4efb-a621-2a63c792d237",
                             "label": "btn_settings_icon",
+                            "scope": "CLASS",
                             "components": [],
                             "texture": {
                                 "key": "btn_settings_icon"
