@@ -162,6 +162,7 @@ class Level extends Phaser.Scene {
 		popup_score.setStyle({ "align": "center", "fontSize": "72px", "stroke": "#944A4C", "strokeThickness": 5 });
 		container_popup.add(popup_score);
 
+		this.bg_rectangle = bg_rectangle;
 		this.container_game = container_game;
 		this.container_bricks = container_bricks;
 		this.container_header_base = container_header_base;
@@ -184,6 +185,8 @@ class Level extends Phaser.Scene {
 		this.events.emit("scene-awake");
 	}
 
+	/** @type {Phaser.GameObjects.Rectangle} */
+	bg_rectangle;
 	/** @type {Phaser.GameObjects.Container} */
 	container_game;
 	/** @type {Phaser.GameObjects.Container} */
@@ -239,6 +242,7 @@ class Level extends Phaser.Scene {
 		});
 	}
 	showPopup = () => {
+		this.input.mouse.releasePointerLock();
 		this.container_popup.setScale(0, 0)
 		this.bg_popup.setScale(0, 0);
 		if (this.isGameOver) {
@@ -367,7 +371,7 @@ class Level extends Phaser.Scene {
 		} else {
 			// To Open
 			this.container_settings_button.setVisible(true);
-			const pos = [{ x: 1000, y: 210 }, { x: 876, y: 196 }, { x: 875, y: 70 }]
+			const pos = [{ x: 1000, y: 210 }, { x: 876, y: 195 }, { x: 875, y: 70 }]
 			this.container_settings_button.list.forEach((button, i) => {
 				this.tweens.add({
 					targets: button,
@@ -422,6 +426,19 @@ class Level extends Phaser.Scene {
 		}
 		this.btnAnimation(this.btn_sound_on, callback);
 	}
+	lockPointer = () => {
+		if (window.innerWidth > 1199) {
+			this.input.mouse.requestPointerLock();
+		}
+		if (!this.isGameStart) {
+			this.isGameStart = true;
+			this.ballsGroup.getChildren().forEach((ball, i) => {
+				ball.setVelocity(150, -1350);
+				ball.setBounce(1);
+				this.showStarParticles(ball);
+			})
+		}
+	}
 	create() {
 		this.bricksGroup = this.physics.add.group();
 		this.powerUpsGroup = this.physics.add.group();
@@ -445,6 +462,7 @@ class Level extends Phaser.Scene {
 		this.oBallInitial = { x: 540, y: 1645 };
 
 		this.bg_popup.setInteractive().on("pointerdown", () => { });
+		this.bg_rectangle.setInteractive().on("pointerdown", () => this.lockPointer());
 		this.btn_info.setInteractive().on("pointerdown", () => this.infoHandler());
 		this.btn_music_on.setInteractive().on("pointerdown", () => this.musicHandler());
 		this.btn_sound_on.setInteractive().on("pointerdown", () => this.soundHandler());
@@ -463,6 +481,7 @@ class Level extends Phaser.Scene {
 					this.bg_popup.setVisible(false);
 				}
 			}
+			this.input.mouse.requestPointerLock();
 			this.btnAnimation(this.btn_popup, callback);
 		});
 		this.btn_replay.setInteractive().on("pointerdown", () => {
@@ -472,18 +491,49 @@ class Level extends Phaser.Scene {
 				this.container_popup.setVisible(false);
 				this.bg_popup.setVisible(false);
 			}
+			this.input.mouse.requestPointerLock();
 			this.btnAnimation(this.btn_replay, callback);
 		});
 
 		// paddle
 		this.paddle = this.physics.add.image(this.oBallInitial.x, this.oBallInitial.y + 55, "paddle");
 		this.paddle.setName("paddle");
-		this.paddle.setSize(this.paddle.width - 20, 10);
-		this.paddle.setOffset(10, 35);
+		this.paddle.setSize(this.paddle.width - 50, 10);
+		this.paddle.setOffset(25, 35);
 		this.paddle.setImmovable();
-		if (window.innerWidth < 1199) {
-			this.paddle.setInteractive();
-		}
+		this.paddle.setInteractive().on("pointerdown", () => this.lockPointer());
+
+		// Lock the pointer when clicked on the canvas
+		// this.input.on('pointerdown', (pointer) => {
+		// 	this.input.mouse.requestPointerLock();
+		// }, this);
+
+		// Move paddle according to mouse movement when the pointer is locked
+		// this.input.on('pointermove', (pointer) => {
+		// 	if (this.input.mouse.locked) {
+		// 		console.log(pointer.movementX)
+		// 		this.paddle.x += pointer.movementX;
+		// 	}
+		// }, this);
+		this.input.on('pointermove', function (pointer) {
+			if (this.input.mouse.locked) {
+				console.log(pointer)
+				this.paddle.x += pointer.movementX;
+				this.paddle.x = Math.min(Math.max(150, this.paddle.x), 930);
+
+				if (!this.isGameStart && !this.isGameOver) {
+					this.ballsGroup.getChildren().forEach(ball => {
+						ball.x = this.paddle.x;
+					})
+				}
+			}
+		}, this);
+
+		// Unlock the pointer when 'Escape' is pressed
+		this.input.keyboard.on('keydown-ESC', (event) => {
+			this.input.mouse.releasePointerLock();
+		}, this);
+
 		this.container_game.add(this.paddle);
 
 		this.fire = this.add.particles("fire");
@@ -513,30 +563,31 @@ class Level extends Phaser.Scene {
 		this.endline.setName("endline");
 		this.endline.setImmovable();
 
-		this.input.on('pointerdown', (p, g) => {
-			if (!this.isGameStart && !g.length) {
-				this.isGameStart = true;
-				this.ballsGroup.getChildren().forEach((ball, i) => {
-					ball.setVelocity(150, -1350);
-					ball.setBounce(1);
-					this.showStarParticles(ball);
-				})
-			}
-		})
+		// this.input.on('pointerdown', (p, g) => {
+		// 	this.isGameStart = true;
+		// 	this.ballsGroup.getChildren().forEach((ball, i) => {
+		// 		ball.setVelocity(150, -1350);
+		// 		ball.setBounce(1);
+		// 		this.showStarParticles(ball);
+		// 	})
+		// if (!this.isGameStart && !g.length) {
+		// }
+		// })
+
 		this.input.on('pointermove', (p) => {
-			let x = p.x;
-			x = Math.min(Math.max(150, x), 930);
-
-			if (!this.isGameOver) {
-				this.paddle.x = x;
-			}
-			if (!this.isGameStart && !this.isGameOver) {
-				this.ballsGroup.getChildren().forEach(ball => {
-					ball.x = x;
-				})
+			if (!this.input.mouse.locked) {
+				let x = p.x;
+				x = Math.min(Math.max(150, x), 930);
+				if (!this.isGameOver) {
+					this.paddle.x = x;
+				}
+				if (!this.isGameStart && !this.isGameOver) {
+					this.ballsGroup.getChildren().forEach(ball => {
+						ball.x = x;
+					})
+				}
 			}
 		})
-
 		// ball, paddle collider
 		this.physics.add.collider(this.ballsGroup, this.paddle, (paddle, ball) => {
 			// console.log(ball.name, paddle.name);
@@ -680,6 +731,14 @@ class Level extends Phaser.Scene {
 		}
 	}
 	update() {
+		// if (!this.isGameOver) {
+		// 	this.paddle.x = this.nPointerX;
+		// }
+		// if (!this.isGameStart && !this.isGameOver) {
+		// 	this.ballsGroup.getChildren().forEach(ball => {
+		// 		ball.x = this.nPointerX;
+		// 	})
+		// }
 		this.setBallsVelocity();
 		this.physics.world.collide(this.bricksGroup, this.ballsGroup, (brick, ball) => {
 			// brick.setImmovable(true);

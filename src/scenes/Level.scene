@@ -19,6 +19,7 @@
                     "type": "Rectangle",
                     "id": "ece8d4b0-8cd2-407e-9b94-c626ab8a98b5",
                     "label": "bg_rectangle",
+                    "scope": "CLASS",
                     "components": [],
                     "x": 540,
                     "y": 960,

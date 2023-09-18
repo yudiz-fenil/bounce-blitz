@@ -105,7 +105,7 @@ class Preload extends Phaser.Scene {
 
 		this.innerBar.setMask(this.maskGraphics.createGeometryMask());
 
-		const loadingDuration = 3000;
+		const loadingDuration = 500;
 		const intervalDuration = 30;
 		const numIntervals = loadingDuration / intervalDuration;
 		let currentInterval = 0;
