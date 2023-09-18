@@ -57,7 +57,7 @@ class Preload extends Phaser.Scene {
 		const text = this.add.text(540, 1566, "", {});
 		text.setOrigin(0.5, 0.5);
 		text.text = "LOADING...";
-		text.setStyle({ "align": "center", "fontSize": "35px", "stroke": "#792a39", "strokeThickness":5});
+		text.setStyle({ "align": "center", "fontSize": "35px", "stroke": "#792a39", "strokeThickness": 5 });
 
 		// progress (components)
 		new PreloadText(progress);
@@ -105,7 +105,7 @@ class Preload extends Phaser.Scene {
 
 		this.innerBar.setMask(this.maskGraphics.createGeometryMask());
 
-		const loadingDuration = 3000;
+		const loadingDuration = 500;
 		const intervalDuration = 30;
 		const numIntervals = loadingDuration / intervalDuration;
 		let currentInterval = 0;
@@ -138,6 +138,7 @@ class Preload extends Phaser.Scene {
 			targets: this.ball,
 			duration: 3000,
 			angle: 360 * 2,
+			repeat: 1,
 		})
 	}
 

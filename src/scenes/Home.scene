@@ -35,7 +35,8 @@
             "label": "logoPrefab",
             "components": [],
             "x": 540,
-            "y": 400
+            "y": 400,
+            "nestedPrefabs": []
         },
         {
             "type": "Image",

@@ -240,7 +240,7 @@ class Level extends Phaser.Scene {
 	}
 	showPopup = () => {
 		this.container_popup.setScale(0, 0)
-		this.bg_popup.setScale(0.4, 0.4);
+		this.bg_popup.setScale(0, 0);
 		if (this.isGameOver) {
 			this.btn_replay.setVisible(false);
 			this.btn_popup.setTexture("btn_retry");
@@ -478,9 +478,12 @@ class Level extends Phaser.Scene {
 		// paddle
 		this.paddle = this.physics.add.image(this.oBallInitial.x, this.oBallInitial.y + 55, "paddle");
 		this.paddle.setName("paddle");
-		this.paddle.setSize(this.paddle.width - 20, this.paddle.height - 60);
+		this.paddle.setSize(this.paddle.width - 20, 10);
+		this.paddle.setOffset(10, 35);
 		this.paddle.setImmovable();
-		this.paddle.setInteractive();
+		if (window.innerWidth < 1199) {
+			this.paddle.setInteractive();
+		}
 		this.container_game.add(this.paddle);
 
 		this.fire = this.add.particles("fire");
@@ -583,12 +586,6 @@ class Level extends Phaser.Scene {
 			this.updateLife();
 			this.isGameStart = false;
 			this.setInitialBall();
-			// const ball = this.ballsGroup.create(this.paddle.x, this.oBallInitial.y, "ball");
-			// ball.setCircle(ball.width / 2);
-			// ball.setName("ball");
-			// ball.setCollideWorldBounds();
-			// ball.setDepth(1);
-			// this.container_game.add(ball);
 		}
 	}
 	fallPowerUps = (brick) => {
@@ -629,8 +626,8 @@ class Level extends Phaser.Scene {
 			setTimeout(() => {
 				fireParticles.remove();
 				this.isFire = false;
-			}, 5000);
-		})
+			}, 3000);
+		});
 	}
 	addTwoBalls = () => {
 		const ball = this.ballsGroup.getChildren()[0];
@@ -654,6 +651,8 @@ class Level extends Phaser.Scene {
 
 		this.showStarParticles(ball2);
 		this.showStarParticles(ball3);
+
+		if (this.isFire) this.showFire();
 	}
 	setBrokenBrick = (brick) => {
 		const name = brick.name;
@@ -667,13 +666,17 @@ class Level extends Phaser.Scene {
 	}
 	popBrick = (brick) => {
 		this.showDustparticles(brick);
-		if (brick.name.includes("hard")) {
-			this.setBrokenBrick(brick);
-		} else if (brick.name.includes("broken")) {
-			this.fallPowerUps(brick);
+		if (this.isFire) {
 			brick.destroy();
 		} else {
-			brick.destroy();
+			if (brick.name.includes("hard")) {
+				this.setBrokenBrick(brick);
+			} else if (brick.name.includes("broken")) {
+				this.fallPowerUps(brick);
+				brick.destroy();
+			} else {
+				brick.destroy();
+			}
 		}
 	}
 	update() {
@@ -686,7 +689,9 @@ class Level extends Phaser.Scene {
 			this.updateScore(10);
 			if (this.bricksGroup.getLength() == 0) {
 				this.setInitialBall();
-				this.showPopup();
+				setTimeout(() => {
+					this.showPopup();
+				}, 300);
 			}
 		}, null, this);
 	}
