@@ -48,6 +48,7 @@ class Preload extends Phaser.Scene {
 		// innerBar
 		const innerBar = this.add.sprite(286, 1660, "energyBar");
 		innerBar.setOrigin(0, 0.5);
+		innerBar.visible = false;
 
 		// ball
 		const ball = this.add.image(320, 1661, "ball");
@@ -105,13 +106,14 @@ class Preload extends Phaser.Scene {
 
 		this.innerBar.setMask(this.maskGraphics.createGeometryMask());
 
-		const loadingDuration = 500;
+		const loadingDuration = 3000;
 		const intervalDuration = 30;
 		const numIntervals = loadingDuration / intervalDuration;
 		let currentInterval = 0;
 		const progressIncrement = 1 / numIntervals;
 
 		const updateProgressBar = () => {
+			this.innerBar.setVisible(true);
 			const currentProgress = currentInterval * progressIncrement;
 			this.maskGraphics.clear();
 			this.maskGraphics.fillStyle(0xffffff);

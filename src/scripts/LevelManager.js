@@ -37,6 +37,7 @@ class LevelManager {
 
 			default:
 				this.level1();
+				this.oScene.nCurrentLevel = 1;
 				break;
 		}
 	}

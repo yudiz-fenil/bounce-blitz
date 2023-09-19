@@ -92,6 +92,11 @@
                 "key": "broken9"
             },
             {
+                "url": "assets/images/buttons/btn_end.png",
+                "type": "image",
+                "key": "btn_end"
+            },
+            {
                 "url": "assets/images/buttons/btn_info.png",
                 "type": "image",
                 "key": "btn_info"
@@ -180,6 +185,11 @@
                 "url": "assets/images/paddle.png",
                 "type": "image",
                 "key": "paddle"
+            },
+            {
+                "url": "assets/images/popups/popup_end.png",
+                "type": "image",
+                "key": "popup_end"
             },
             {
                 "url": "assets/images/popups/popup_gameover.png",

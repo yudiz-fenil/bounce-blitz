@@ -1,6 +1,5 @@
 
 // You can write more code here
-let nGameCurrentLevel = 1;
 
 /* START OF COMPILED CODE */
 
@@ -66,34 +65,36 @@ class Level extends Phaser.Scene {
 		container_header.add(container_settings);
 
 		// container_settings_button
-		const container_settings_button = this.add.container(0, -1);
+		const container_settings_button = this.add.container(0, 0);
 		container_settings_button.visible = false;
 		container_settings.add(container_settings_button);
 
 		// btn_info
-		const btn_info = this.add.image(1000, 70, "btn_info");
-		btn_info.scaleX = 0.3;
-		btn_info.scaleY = 0.3;
+		const btn_info = this.add.image(996, 94, "btn_info");
+		btn_info.scaleX = 0.85;
+		btn_info.scaleY = 0.85;
 		container_settings_button.add(btn_info);
 
 		// btn_sound_on
-		const btn_sound_on = this.add.image(1000, 70, "btn_sound_on");
-		btn_sound_on.scaleX = 0.3;
-		btn_sound_on.scaleY = 0.3;
+		const btn_sound_on = this.add.image(996, 94, "btn_sound_on");
+		btn_sound_on.scaleX = 0.85;
+		btn_sound_on.scaleY = 0.85;
 		container_settings_button.add(btn_sound_on);
 
 		// btn_music_on
-		const btn_music_on = this.add.image(1000, 70, "btn_music_on");
-		btn_music_on.scaleX = 0.3;
-		btn_music_on.scaleY = 0.3;
+		const btn_music_on = this.add.image(996, 94, "btn_music_on");
+		btn_music_on.scaleX = 0.85;
+		btn_music_on.scaleY = 0.85;
 		container_settings_button.add(btn_music_on);
 
 		// btn_settings
-		const btn_settings = this.add.image(1000, 70, "btn_settings");
+		const btn_settings = this.add.image(996, 94, "btn_settings");
+		btn_settings.scaleX = 0.85;
+		btn_settings.scaleY = 0.85;
 		container_settings.add(btn_settings);
 
 		// btn_settings_icon
-		const btn_settings_icon = this.add.image(1000, 70, "btn_settings_icon");
+		const btn_settings_icon = this.add.image(996, 94, "btn_settings_icon");
 		container_settings.add(btn_settings_icon);
 
 		// container_lifes
@@ -245,14 +246,21 @@ class Level extends Phaser.Scene {
 		this.input.mouse.releasePointerLock();
 		this.container_popup.setScale(0, 0)
 		this.bg_popup.setScale(0, 0);
-		if (this.isGameOver) {
+		if (this.nCurrentLevel >= 10) {
 			this.btn_replay.setVisible(false);
-			this.btn_popup.setTexture("btn_retry");
+			this.btn_popup.setTexture("btn_end");
 			this.btn_popup.setX(0);
-			this.popup_win.setTexture("popup_gameover");
+			this.popup_win.setTexture("popup_end");
 		} else {
-			this.btn_popup.setTexture("btn_next");
-			this.popup_win.setTexture("popup_win");
+			if (this.isGameOver) {
+				this.btn_replay.setVisible(false);
+				this.btn_popup.setTexture("btn_retry");
+				this.btn_popup.setX(0);
+				this.popup_win.setTexture("popup_gameover");
+			} else {
+				this.btn_popup.setTexture("btn_next");
+				this.popup_win.setTexture("popup_win");
+			}
 		}
 		this.container_popup.setVisible(true);
 		this.popup_score.setText(this.targetScore);
@@ -272,8 +280,15 @@ class Level extends Phaser.Scene {
 		})
 	}
 	setInitialBall = () => {
-		this.ballsGroup.clear(true, true);
 		this.powerUpsGroup.clear(true, true);
+		if (this.isFire) {
+			this.ballsGroup.getChildren().forEach((ball, i) => {
+				if (ball.emitter) {
+					ball.emitter.remove();
+				}
+			})
+		}
+		this.ballsGroup.clear(true, true);
 		this.starParticlesGroup.forEach(emitters => {
 			emitters.forEach(emitter => {
 				emitter.stop();
@@ -351,38 +366,42 @@ class Level extends Phaser.Scene {
 		// 	emitter.remove();
 		// }, 500);
 	}
+	toOpenSettings = () => {
+		this.container_settings_button.setVisible(true);
+		const pos = [{ x: 995, y: 204 }, { x: 892, y: 185 }, { x: 883, y: 79 }]
+		this.container_settings_button.list.forEach((button, i) => {
+			this.tweens.add({
+				targets: button,
+				x: pos[i].x,
+				y: pos[i].y,
+				scaleX: 0.85,
+				scaleY: 0.85,
+				duration: 250,
+				delay: 200 * i,
+			})
+		})
+	}
+	toCloseSettings = () => {
+		this.container_settings_button.list.forEach((button, i) => {
+			this.tweens.add({
+				targets: button,
+				x: 1000,
+				y: 70,
+				scaleX: 0.3,
+				scaleY: 0.3,
+				duration: 250,
+				delay: 200 * i,
+				onComplete: () => {
+					if (i == 2) this.container_settings_button.setVisible(false);
+				}
+			})
+		})
+	}
 	settingsHandler = () => {
 		if (this.container_settings_button.visible) {
-			// To Close
-			this.container_settings_button.list.forEach((button, i) => {
-				this.tweens.add({
-					targets: button,
-					x: 1000,
-					y: 70,
-					scaleX: 0.3,
-					scaleY: 0.3,
-					duration: 250,
-					delay: 200 * i,
-					onComplete: () => {
-						if (i == 2) this.container_settings_button.setVisible(false);
-					}
-				})
-			})
+			this.toCloseSettings();
 		} else {
-			// To Open
-			this.container_settings_button.setVisible(true);
-			const pos = [{ x: 1000, y: 210 }, { x: 876, y: 195 }, { x: 875, y: 70 }]
-			this.container_settings_button.list.forEach((button, i) => {
-				this.tweens.add({
-					targets: button,
-					x: pos[i].x,
-					y: pos[i].y,
-					scaleX: 1,
-					scaleY: 1,
-					duration: 250,
-					delay: 200 * i,
-				})
-			})
+			this.toOpenSettings();
 		}
 		this.tweens.add({
 			targets: this.btn_settings_icon,
@@ -438,6 +457,7 @@ class Level extends Phaser.Scene {
 				this.showStarParticles(ball);
 			})
 		}
+		this.toCloseSettings();
 	}
 	create() {
 		this.bricksGroup = this.physics.add.group();
@@ -469,19 +489,26 @@ class Level extends Phaser.Scene {
 		this.btn_settings.setInteractive().on("pointerdown", () => this.settingsHandler());
 		this.btn_popup.setInteractive().on("pointerdown", () => {
 			let callback;
-			if (this.isGameOver) {
+			if (this.nCurrentLevel >= 10) {
 				callback = () => {
-					this.scene.restart();
+					this.scene.stop("Level");
+					this.scene.start("Home");
 				}
 			} else {
-				callback = () => {
-					this.nCurrentLevel++;
-					this.setAssets();
-					this.container_popup.setVisible(false);
-					this.bg_popup.setVisible(false);
+				if (this.isGameOver) {
+					callback = () => {
+						this.scene.restart();
+					}
+				} else {
+					callback = () => {
+						this.nCurrentLevel++;
+						this.setAssets();
+						this.container_popup.setVisible(false);
+						this.bg_popup.setVisible(false);
+					}
 				}
+				this.input.mouse.requestPointerLock();
 			}
-			this.input.mouse.requestPointerLock();
 			this.btnAnimation(this.btn_popup, callback);
 		});
 		this.btn_replay.setInteractive().on("pointerdown", () => {
@@ -515,9 +542,8 @@ class Level extends Phaser.Scene {
 		// 		this.paddle.x += pointer.movementX;
 		// 	}
 		// }, this);
-		this.input.on('pointermove', function (pointer) {
-			if (this.input.mouse.locked) {
-				console.log(pointer)
+		this.input.on('pointermove', (pointer) => {
+			if (this.input.mouse.locked && !this.container_popup.visible) {
 				this.paddle.x += pointer.movementX;
 				this.paddle.x = Math.min(Math.max(150, this.paddle.x), 930);
 
@@ -575,7 +601,7 @@ class Level extends Phaser.Scene {
 		// })
 
 		this.input.on('pointermove', (p) => {
-			if (!this.input.mouse.locked) {
+			if (!this.input.mouse.locked && !this.container_popup.visible) {
 				let x = p.x;
 				x = Math.min(Math.max(150, x), 930);
 				if (!this.isGameOver) {
@@ -677,7 +703,7 @@ class Level extends Phaser.Scene {
 			setTimeout(() => {
 				fireParticles.remove();
 				this.isFire = false;
-			}, 3000);
+			}, 5500);
 		});
 	}
 	addTwoBalls = () => {
@@ -731,15 +757,6 @@ class Level extends Phaser.Scene {
 		}
 	}
 	update() {
-		// if (!this.isGameOver) {
-		// 	this.paddle.x = this.nPointerX;
-		// }
-		// if (!this.isGameStart && !this.isGameOver) {
-		// 	this.ballsGroup.getChildren().forEach(ball => {
-		// 		ball.x = this.nPointerX;
-		// 	})
-		// }
-		this.setBallsVelocity();
 		this.physics.world.collide(this.bricksGroup, this.ballsGroup, (brick, ball) => {
 			// brick.setImmovable(true);
 			ball.setVelocityX(this.oBallVelocity.x);
@@ -753,6 +770,7 @@ class Level extends Phaser.Scene {
 				}, 300);
 			}
 		}, null, this);
+		this.setBallsVelocity();
 	}
 	setBallsVelocity = () => {
 		const ball = this.ballsGroup.getChildren()[0];

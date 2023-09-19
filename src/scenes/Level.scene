@@ -119,7 +119,6 @@
                             "label": "container_settings_button",
                             "scope": "CLASS",
                             "components": [],
-                            "y": -1,
                             "visible": false,
                             "list": [
                                 {
@@ -131,10 +130,10 @@
                                     "texture": {
                                         "key": "btn_info"
                                     },
-                                    "x": 1000,
-                                    "y": 70,
-                                    "scaleX": 0.3,
-                                    "scaleY": 0.3
+                                    "x": 996,
+                                    "y": 94,
+                                    "scaleX": 0.85,
+                                    "scaleY": 0.85
                                 },
                                 {
                                     "type": "Image",
@@ -145,10 +144,10 @@
                                     "texture": {
                                         "key": "btn_sound_on"
                                     },
-                                    "x": 1000,
-                                    "y": 70,
-                                    "scaleX": 0.3,
-                                    "scaleY": 0.3
+                                    "x": 996,
+                                    "y": 94,
+                                    "scaleX": 0.85,
+                                    "scaleY": 0.85
                                 },
                                 {
                                     "type": "Image",
@@ -159,10 +158,10 @@
                                     "texture": {
                                         "key": "btn_music_on"
                                     },
-                                    "x": 1000,
-                                    "y": 70,
-                                    "scaleX": 0.3,
-                                    "scaleY": 0.3
+                                    "x": 996,
+                                    "y": 94,
+                                    "scaleX": 0.85,
+                                    "scaleY": 0.85
                                 }
                             ]
                         },
@@ -175,8 +174,10 @@
                             "texture": {
                                 "key": "btn_settings"
                             },
-                            "x": 1000,
-                            "y": 70
+                            "x": 996,
+                            "y": 94,
+                            "scaleX": 0.85,
+                            "scaleY": 0.85
                         },
                         {
                             "type": "Image",
@@ -187,8 +188,8 @@
                             "texture": {
                                 "key": "btn_settings_icon"
                             },
-                            "x": 1000,
-                            "y": 70
+                            "x": 996,
+                            "y": 94
                         }
                     ]
                 },
