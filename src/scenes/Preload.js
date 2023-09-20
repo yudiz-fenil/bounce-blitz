@@ -38,10 +38,6 @@ class Preload extends Phaser.Scene {
 		progress.text = "0%";
 		progress.setStyle({ "fontSize": "100px" });
 
-		// logoPrefab
-		const logoPrefab = new LogoPrefab(this, 540, 400);
-		this.add.existing(logoPrefab);
-
 		// outerBar
 		const outerBar = this.add.sprite(540, 1660, "energyBarContainer");
 
@@ -58,7 +54,10 @@ class Preload extends Phaser.Scene {
 		const text = this.add.text(540, 1566, "", {});
 		text.setOrigin(0.5, 0.5);
 		text.text = "LOADING...";
-		text.setStyle({ "align": "center", "fontSize": "35px", "stroke": "#792a39", "strokeThickness": 5 });
+		text.setStyle({ "align": "center", "fontSize": "35px", "stroke": "#792a39", "strokeThickness":5});
+
+		// logo
+		this.add.image(540, 400, "logo");
 
 		// progress (components)
 		new PreloadText(progress);

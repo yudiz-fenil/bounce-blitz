@@ -89,11 +89,11 @@ class LevelManager {
 				const brick = this.oScene.bricksGroup.create((180 * i) + 180, 300 + (j * 130), "brick" + (nBrick));
 				brick.setScale(1.5, 1.5);
 				brick.setName("normalbrick_" + nBrickCount);
-				if (j == 0 || j == 3) {
+				if (j == 3) {
 					brick.setName("hard_brick_" + nBrickCount);
 				}
 				if (nBrickCount == 17) {
-					brick.setName("hard_balls_brick_" + nBrickCount);
+					brick.setName("hard_fire_brick_" + nBrickCount);
 				}
 			}
 		}
@@ -109,14 +109,11 @@ class LevelManager {
 				const brick = this.oScene.bricksGroup.create((170 * i) + 120, 300 + (j * 130), "brick" + (nBrick));
 				brick.setScale(1.5, 1.5);
 				brick.setName("normalbrick_" + nBrickCount);
-				if (j == 0 || j == 1 || j == 3 || j == 5) {
+				if (j == 0 || j == 5) {
 					brick.setName("hard_brick_" + nBrickCount);
 				}
-				if (nBrickCount == 17) {
+				if (nBrickCount == 17 || nBrickCount == 23) {
 					brick.setName("hard_fire_brick_" + nBrickCount);
-				}
-				if (nBrickCount == 23) {
-					brick.setName("hard_balls_brick_" + nBrickCount);
 				}
 			}
 		}
@@ -132,7 +129,7 @@ class LevelManager {
 				const brick = this.oScene.bricksGroup.create((170 * i) + 120, 300 + (j * 120), "brick" + (nBrick));
 				brick.setScale(1.5, 1.5);
 				brick.setName("normalbrick_" + nBrickCount);
-				if (j == 0 || j == 1 || j == 3 || j == 5) {
+				if (j == 0 || j == 3 || j == 5) {
 					brick.setName("hard_brick_" + nBrickCount);
 				}
 				if (nBrickCount == 17) {
@@ -152,7 +149,7 @@ class LevelManager {
 				const brick = this.oScene.bricksGroup.create((170 * i) + 120, 300 + (j * 120), "brick" + (nBrick));
 				brick.setScale(1.5, 1.5);
 				brick.setName("normalbrick_" + nBrickCount);
-				if (j == 0 || j == 1 || j == 3 || j == 4 || j == 6) {
+				if (j == 0 || j == 1 || j == 3 || j == 6) {
 					brick.setName("hard_brick_" + nBrickCount);
 				}
 				if (nBrickCount == 17) {
@@ -165,14 +162,14 @@ class LevelManager {
 		let nBrick = 0;
 		let nBrickCount = 0;
 		for (let i = 0; i < 8; i++) { // column count
-			for (let j = 0; j < 8; j++) { // row count
+			for (let j = 0; j < 7; j++) { // row count
 				nBrick++;
 				nBrickCount++;
 				if (nBrick > 9) nBrick = 1;
 				const brick = this.oScene.bricksGroup.create((130 * i) + 90, 300 + (j * 120), "brick" + (nBrick));
 				brick.setScale(1.3);
 				brick.setName("normalbrick_" + nBrickCount);
-				if (j == 0 || j == 2 || j == 4 || j == 6) {
+				if (j == 0 || j == 4 || j == 6) {
 					brick.setName("hard_brick_" + nBrickCount);
 				}
 				if (nBrickCount == 18) {
@@ -195,7 +192,7 @@ class LevelManager {
 				const brick = this.oScene.bricksGroup.create((130 * i) + 90, 300 + (j * 120), "brick" + (nBrick));
 				brick.setScale(1.3);
 				brick.setName("normalbrick_" + nBrickCount);
-				if (j == 0 || j == 2 || j == 4 || j == 6 || j == 7) {
+				if (j == 0 || j == 4 || j == 6 || j == 7) {
 					brick.setName("hard_brick_" + nBrickCount);
 				}
 				if (nBrickCount == 18) {
@@ -218,10 +215,10 @@ class LevelManager {
 				const brick = this.oScene.bricksGroup.create((130 * i) + 90, 300 + (j * 110), "brick" + (nBrick));
 				brick.setScale(1.3);
 				brick.setName("normalbrick_" + nBrickCount);
-				if (j == 8 || j == 7 || j == 5 || j == 4 || j == 2 || j == 1) {
+				if (j == 5 || j == 4 || j == 1) {
 					brick.setName("hard_brick_" + nBrickCount);
 				}
-				if (nBrickCount == 18 || nBrickCount == 65) {
+				if (nBrickCount == 18) {
 					brick.setName("hard_balls_brick_" + nBrickCount);
 				}
 				if (nBrickCount == 28 || nBrickCount == 5) {
@@ -241,10 +238,13 @@ class LevelManager {
 				const brick = this.oScene.bricksGroup.create((127 * i) - 30, 250 + (j * 110), "brick" + (j));
 				brick.setScale(1.3);
 				brick.setName("hard_brick_" + nBrickCount);
-				if (nBrickCount == 18 || nBrickCount == 65) {
+				if (j == 9) {
+					brick.setName("normalbrick_" + nBrickCount);
+				}
+				if (nBrickCount == 65) {
 					brick.setName("hard_balls_brick_" + nBrickCount);
 				}
-				if (nBrickCount == 28 || nBrickCount == 5 || nBrickCount == 50) {
+				if (nBrickCount == 28 || nBrickCount == 5 || nBrickCount == 50 || nBrickCount == 64) {
 					brick.setName("hard_fire_brick_" + nBrickCount);
 				}
 			}

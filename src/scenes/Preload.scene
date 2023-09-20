@@ -44,19 +44,6 @@
             "fontSize": "100px"
         },
         {
-            "prefabId": "5f0c2f8e-259b-4eb7-8192-d17220e6a05f",
-            "id": "bc2ba70e-cdfe-472b-981c-18c548fff6b9",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "logoPrefab",
-            "components": [],
-            "x": 540,
-            "y": 400,
-            "nestedPrefabs": []
-        },
-        {
             "type": "Sprite",
             "id": "5286ebae-ea8e-429a-a979-ab00843fdf4b",
             "label": "outerBar",
@@ -109,6 +96,17 @@
             "fontSize": "35px",
             "stroke": "#792a39",
             "strokeThickness": 5
+        },
+        {
+            "type": "Image",
+            "id": "3642d397-ff1b-4ad0-a2d3-fecfae89161e",
+            "label": "logo",
+            "components": [],
+            "texture": {
+                "key": "logo"
+            },
+            "x": 540,
+            "y": 400
         }
     ],
     "plainObjects": [],

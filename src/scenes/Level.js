@@ -263,7 +263,7 @@ class Level extends Phaser.Scene {
 			}
 		}
 		this.container_popup.setVisible(true);
-		this.popup_score.setText(this.targetScore);
+		this.popup_score.setText(this.nScore);
 		this.bg_popup.setVisible(true);
 		this.tweens.add({
 			targets: this.container_popup,
@@ -307,21 +307,11 @@ class Level extends Phaser.Scene {
 	setAssets = () => {
 		this.oLevelManager.setLevel(this.nCurrentLevel);
 		this.txt_level.setText("LEVEL - " + this.nCurrentLevel);
+		this.isFire = false;
 	}
 	updateScore = (n) => {
-		this.targetScore += n;
-		if (this.nScore === this.targetScore) return;
-		this.tweens.killTweensOf(this);
-		this.tweens.add({
-			targets: this,
-			nScore: this.targetScore,
-			duration: 1000,
-			ease: 'Linear',
-			onUpdate: () => {
-				this.nScore = Math.round(this.nScore);
-				this.txt_score.setText(this.nScore);
-			}
-		});
+		this.nScore += n;
+		this.txt_score.setText(this.nScore);
 	};
 	updateLife = () => {
 		if (this.nTotalLife <= 0) {
@@ -452,7 +442,7 @@ class Level extends Phaser.Scene {
 		if (!this.isGameStart) {
 			this.isGameStart = true;
 			this.ballsGroup.getChildren().forEach((ball, i) => {
-				ball.setVelocity(150, -1350);
+				ball.setVelocity(150, -1300);
 				ball.setBounce(1);
 				this.showStarParticles(ball);
 			})
@@ -466,7 +456,6 @@ class Level extends Phaser.Scene {
 		this.fireGroup = this.add.group();
 		this.starParticlesGroup = [];
 		this.nCurrentLevel = 1;
-		this.targetScore = 0;
 		this.nScore = 0;
 		this.nTotalLife = 3;
 		this.isMusicPlaying = true;
@@ -589,17 +578,6 @@ class Level extends Phaser.Scene {
 		this.endline.setName("endline");
 		this.endline.setImmovable();
 
-		// this.input.on('pointerdown', (p, g) => {
-		// 	this.isGameStart = true;
-		// 	this.ballsGroup.getChildren().forEach((ball, i) => {
-		// 		ball.setVelocity(150, -1350);
-		// 		ball.setBounce(1);
-		// 		this.showStarParticles(ball);
-		// 	})
-		// if (!this.isGameStart && !g.length) {
-		// }
-		// })
-
 		this.input.on('pointermove', (p) => {
 			if (!this.input.mouse.locked && !this.container_popup.visible) {
 				let x = p.x;
@@ -618,7 +596,7 @@ class Level extends Phaser.Scene {
 		this.physics.add.collider(this.ballsGroup, this.paddle, (paddle, ball) => {
 			// console.log(ball.name, paddle.name);
 			if (this.isGameStart) {
-				ball.setVelocity(Phaser.Math.Between(-800, 800), -1350);
+				ball.setVelocity(Phaser.Math.Between(-800, 800), -1300);
 			}
 		});
 		// ball, header collider
@@ -647,6 +625,20 @@ class Level extends Phaser.Scene {
 					break;
 			}
 		});
+		this.physics.add.collider(this.bricksGroup, this.ballsGroup, (brick, ball) => {
+			// brick.setImmovable(true);
+			ball.setVelocityX(this.oBallVelocity.x);
+			ball.setVelocityY(this.isFire ? this.oBallVelocity.y : -this.oBallVelocity.y);
+			this.popBrick(brick);
+			this.updateScore(10);
+			if (this.bricksGroup.getLength() == 0) {
+				this.setInitialBall();
+				setTimeout(() => {
+					this.showPopup();
+				}, 300);
+			}
+		});
+
 	}
 	setBalls = (ball) => {
 		if (ball.emitter) {
@@ -757,19 +749,19 @@ class Level extends Phaser.Scene {
 		}
 	}
 	update() {
-		this.physics.world.collide(this.bricksGroup, this.ballsGroup, (brick, ball) => {
-			// brick.setImmovable(true);
-			ball.setVelocityX(this.oBallVelocity.x);
-			ball.setVelocityY(this.isFire ? this.oBallVelocity.y : -this.oBallVelocity.y);
-			this.popBrick(brick);
-			this.updateScore(10);
-			if (this.bricksGroup.getLength() == 0) {
-				this.setInitialBall();
-				setTimeout(() => {
-					this.showPopup();
-				}, 300);
-			}
-		}, null, this);
+		// this.physics.world.collide(this.bricksGroup, this.ballsGroup, (brick, ball) => {
+		// 	// brick.setImmovable(true);
+		// 	ball.setVelocityX(this.oBallVelocity.x);
+		// 	ball.setVelocityY(this.isFire ? this.oBallVelocity.y : -this.oBallVelocity.y);
+		// 	this.popBrick(brick);
+		// 	this.updateScore(10);
+		// 	if (this.bricksGroup.getLength() == 0) {
+		// 		this.setInitialBall();
+		// 		setTimeout(() => {
+		// 			this.showPopup();
+		// 		}, 300);
+		// 	}
+		// }, null, this);
 		this.setBallsVelocity();
 	}
 	setBallsVelocity = () => {
