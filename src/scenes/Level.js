@@ -246,22 +246,24 @@ class Level extends Phaser.Scene {
 		this.input.mouse.releasePointerLock();
 		this.container_popup.setScale(0, 0)
 		this.bg_popup.setScale(0, 0);
-		if (this.nCurrentLevel >= 10) {
+
+		if (this.isGameOver) {
 			this.btn_replay.setVisible(false);
-			this.btn_popup.setTexture("btn_end");
+			this.btn_popup.setTexture("btn_retry");
 			this.btn_popup.setX(0);
-			this.popup_win.setTexture("popup_end");
+			this.popup_win.setTexture("popup_gameover");
 		} else {
-			if (this.isGameOver) {
+			if (this.nCurrentLevel >= 10) {
 				this.btn_replay.setVisible(false);
-				this.btn_popup.setTexture("btn_retry");
+				this.btn_popup.setTexture("btn_end");
 				this.btn_popup.setX(0);
-				this.popup_win.setTexture("popup_gameover");
+				this.popup_win.setTexture("popup_end");
 			} else {
 				this.btn_popup.setTexture("btn_next");
 				this.popup_win.setTexture("popup_win");
 			}
 		}
+
 		this.container_popup.setVisible(true);
 		this.popup_score.setText(this.nScore);
 		this.bg_popup.setVisible(true);
@@ -478,15 +480,17 @@ class Level extends Phaser.Scene {
 		this.btn_settings.setInteractive().on("pointerdown", () => this.settingsHandler());
 		this.btn_popup.setInteractive().on("pointerdown", () => {
 			let callback;
-			if (this.nCurrentLevel >= 10) {
+
+			if (this.isGameOver) {
 				callback = () => {
-					this.scene.stop("Level");
-					this.scene.start("Home");
+					this.scene.restart();
+					this.input.mouse.requestPointerLock();
 				}
 			} else {
-				if (this.isGameOver) {
+				if (this.nCurrentLevel >= 10) {
 					callback = () => {
-						this.scene.restart();
+						this.scene.stop("Level");
+						this.scene.start("Home");
 					}
 				} else {
 					callback = () => {
@@ -494,10 +498,11 @@ class Level extends Phaser.Scene {
 						this.setAssets();
 						this.container_popup.setVisible(false);
 						this.bg_popup.setVisible(false);
+						this.input.mouse.requestPointerLock();
 					}
 				}
-				this.input.mouse.requestPointerLock();
 			}
+
 			this.btnAnimation(this.btn_popup, callback);
 		});
 		this.btn_replay.setInteractive().on("pointerdown", () => {
