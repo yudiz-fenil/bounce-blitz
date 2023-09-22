@@ -82,6 +82,29 @@ class Home extends Phaser.Scene {
 			}
 		});
 	}
+	pointerOver = (btn, scale) => {
+		this.input.setDefaultCursor('pointer');
+		this.tweens.add({
+			targets: btn,
+			scaleX: scale + 0.05,
+			scaleY: scale + 0.05,
+			duration: 50
+		})
+	}
+	pointerOut = (btn, scale) => {
+		this.input.setDefaultCursor('default');
+		this.tweens.add({
+			targets: btn,
+			scaleX: scale,
+			scaleY: scale,
+			duration: 50,
+			onComplete: () => {
+				btn.forEach(element => {
+					element.setScale(scale);
+				});
+			}
+		})
+	}
 	create() {
 		this.editorCreate();
 		this.isMusicPlaying = true;
@@ -123,6 +146,15 @@ class Home extends Phaser.Scene {
 			};
 			this.btnAnimation(this.btn_sound_on, callback);
 		})
+
+		this.btn_play.on('pointerover', () => this.pointerOver([this.btn_play], 1.2));
+		this.btn_play.on('pointerout', () => this.pointerOut([this.btn_play], 1.2));
+		this.btn_music_on.on('pointerover', () => this.pointerOver([this.btn_music_on], 1.2));
+		this.btn_music_on.on('pointerout', () => this.pointerOut([this.btn_music_on], 1.2));
+		this.btn_sound_on.on('pointerover', () => this.pointerOver([this.btn_sound_on], 1.2));
+		this.btn_sound_on.on('pointerout', () => this.pointerOut([this.btn_sound_on], 1.2));
+		this.btn_info.on('pointerover', () => this.pointerOver([this.btn_info], 1.2));
+		this.btn_info.on('pointerout', () => this.pointerOut([this.btn_info], 1.2));
 	}
 
 	/* END-USER-CODE */

@@ -307,8 +307,8 @@
                     },
                     "x": 80,
                     "y": 210,
-                    "scaleX": 1.5,
-                    "scaleY": 1.5
+                    "scaleX": 1.65,
+                    "scaleY": 1.65
                 },
                 {
                     "type": "Text",

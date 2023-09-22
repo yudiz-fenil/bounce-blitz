@@ -145,8 +145,8 @@ class Level extends Phaser.Scene {
 
 		// btn_popup
 		const btn_popup = this.add.image(80, 210, "btn_retry");
-		btn_popup.scaleX = 1.5;
-		btn_popup.scaleY = 1.5;
+		btn_popup.scaleX = 1.65;
+		btn_popup.scaleY = 1.65;
 		container_popup.add(btn_popup);
 
 		// txt_score_1
@@ -241,6 +241,29 @@ class Level extends Phaser.Scene {
 				if (callback) callback();
 			}
 		});
+	}
+	pointerOver = (btn, scale) => {
+		this.input.setDefaultCursor('pointer');
+		this.tweens.add({
+			targets: btn,
+			scaleX: scale + 0.05,
+			scaleY: scale + 0.05,
+			duration: 50
+		})
+	}
+	pointerOut = (btn, scale) => {
+		this.input.setDefaultCursor('default');
+		this.tweens.add({
+			targets: btn,
+			scaleX: scale,
+			scaleY: scale,
+			duration: 50,
+			onComplete: () => {
+				btn.forEach(element => {
+					element.setScale(scale);
+				});
+			}
+		})
 	}
 	showPopup = () => {
 		this.input.mouse.releasePointerLock();
@@ -463,6 +486,7 @@ class Level extends Phaser.Scene {
 		this.isMusicPlaying = true;
 		this.isSoundPlaying = true;
 		this.editorCreate();
+		this.input.setDefaultCursor('default');
 		this.oLevelManager = new LevelManager(this);
 		this.container_popup.setDepth(2);
 		this.updateScore(0);
@@ -478,6 +502,20 @@ class Level extends Phaser.Scene {
 		this.btn_music_on.setInteractive().on("pointerdown", () => this.musicHandler());
 		this.btn_sound_on.setInteractive().on("pointerdown", () => this.soundHandler());
 		this.btn_settings.setInteractive().on("pointerdown", () => this.settingsHandler());
+
+		this.btn_settings.on('pointerover', () => this.pointerOver([this.btn_settings], 0.85));
+		this.btn_settings.on('pointerout', () => this.pointerOut([this.btn_settings], 0.85));
+		this.btn_music_on.on('pointerover', () => this.pointerOver([this.btn_music_on], 0.85));
+		this.btn_music_on.on('pointerout', () => this.pointerOut([this.btn_music_on], 0.85));
+		this.btn_sound_on.on('pointerover', () => this.pointerOver([this.btn_sound_on], 0.85));
+		this.btn_sound_on.on('pointerout', () => this.pointerOut([this.btn_sound_on], 0.85));
+		this.btn_info.on('pointerover', () => this.pointerOver([this.btn_info], 0.85));
+		this.btn_info.on('pointerout', () => this.pointerOut([this.btn_info], 0.85));
+		this.btn_replay.on('pointerover', () => this.pointerOver([this.btn_replay], 1));
+		this.btn_replay.on('pointerout', () => this.pointerOut([this.btn_replay], 1));
+		this.btn_popup.on('pointerover', () => this.pointerOver([this.btn_popup], 1.65));
+		this.btn_popup.on('pointerout', () => this.pointerOut([this.btn_popup], 1.65));
+
 		this.btn_popup.setInteractive().on("pointerdown", () => {
 			let callback;
 
